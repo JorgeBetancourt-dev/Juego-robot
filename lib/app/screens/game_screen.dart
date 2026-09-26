@@ -75,13 +75,11 @@ class _GameScreenState extends State<GameScreen> {
             ),
             if (widget.multiplayerRoom case final room?)
               Positioned(
-                top: 12,
-                left: 16,
+                top: 64,
+                right: 16,
                 child: Chip(
                   avatar: const Icon(Icons.groups, size: 18),
-                  label: Text(
-                    '${widget.multiplayerClient?.localPlayerName ?? 'M-0'} · ${room.name}',
-                  ),
+                  label: Text(room.name),
                 ),
               ),
           ],

@@ -186,5 +186,12 @@ void main() {
     expect(multiplayerMap.hazards, isEmpty);
     expect(multiplayerMap.enemyMarkers, isEmpty);
     expect(multiplayerMap.checkpointMarkers, isEmpty);
+
+    final spawns = [
+      for (var index = 0; index < 4; index++)
+        multiplayerMap.multiplayerSpawnFor(spawnIndex: index)!,
+    ];
+    expect(spawns.map((spawn) => spawn.y), everyElement(378));
+    expect(spawns.map((spawn) => spawn.x), [476, 700, 552, 776]);
   });
 }

@@ -157,7 +157,12 @@ class TiledContinuousWorld extends Component {
     final maxY = math.max(32.0, map.worldHeight - config.playerHeight - 32);
     final spawnIndex = multiplayerClient?.spawnIndex ?? 0;
     final initialSpawn = multiplayer
-        ? Vec2d(180 + 280.0 * spawnIndex, 870)
+        ? map.multiplayerSpawnFor(
+                spawnIndex: spawnIndex,
+                playerWidth: config.playerWidth,
+                playerHeight: config.playerHeight,
+              ) ??
+              const Vec2d(480, 378)
         : _initialSpawn;
     return Vec2d(
       initialSpawn.x.clamp(32.0, maxX).toDouble(),

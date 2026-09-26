@@ -98,6 +98,37 @@ class TiledMapData {
   double get worldHeight =>
       ((maxCellY - originCellY + 1) * tileHeight).toDouble();
 
+  /// Coloca hasta cuatro jugadores sobre las dos plataformas más cercanas al
+  /// centro horizontal de la arena. Los puestos 1 y 3 comparten la plataforma
+  /// izquierda; los puestos 2 y 4, la derecha.
+  Vec2d? multiplayerSpawnFor({
+    required int spawnIndex,
+    double playerWidth = 28,
+    double playerHeight = 42,
+  }) {
+    if (profile != TiledMapProfile.multiplayer || oneWayPlatforms.length < 2) {
+      return null;
+    }
+    final centerX = worldWidth / 2;
+    final centralPlatforms = [...oneWayPlatforms]
+      ..sort((first, second) {
+        final firstDistance = ((first.left + first.width / 2) - centerX).abs();
+        final secondDistance = ((second.left + second.width / 2) - centerX)
+            .abs();
+        return firstDistance.compareTo(secondDistance);
+      });
+    final pair = centralPlatforms.take(2).toList()
+      ..sort((first, second) => first.left.compareTo(second.left));
+    final safeIndex = spawnIndex.clamp(0, 3);
+    final platform = pair[safeIndex % 2];
+    final secondPosition = safeIndex >= 2;
+    const horizontalPadding = 28.0;
+    final x = secondPosition
+        ? platform.right - playerWidth - horizontalPadding
+        : platform.left + horizontalPadding;
+    return Vec2d(x, platform.top - playerHeight);
+  }
+
   static Future<TiledMapData> load({
     String path = assetPath,
     TiledMapProfile profile = TiledMapProfile.campaign,
