@@ -35,7 +35,9 @@ campaña.
 
 La versión de prueba usa por defecto el servicio gratuito:
 `wss://sistema-caido-multiplayer.onrender.com/ws`. Se puede sustituir mediante
-`MULTIPLAYER_URL` para desarrollo local.
+`MULTIPLAYER_URL` para desarrollo local. Render puede suspender la instancia
+después de un periodo sin actividad, por lo que la primera conexión puede tardar
+aproximadamente un minuto.
 
 ## Controles
 

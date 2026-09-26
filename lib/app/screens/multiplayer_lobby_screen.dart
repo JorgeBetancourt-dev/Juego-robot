@@ -57,6 +57,11 @@ class _MultiplayerLobbyScreenState extends State<MultiplayerLobbyScreen> {
                 CircularProgressIndicator(),
                 SizedBox(height: 16),
                 Text('CONECTANDO AL SERVIDOR...'),
+                SizedBox(height: 8),
+                Text(
+                  'La primera conexión puede tardar hasta un minuto.',
+                  textAlign: TextAlign.center,
+                ),
               ],
             ),
           ),

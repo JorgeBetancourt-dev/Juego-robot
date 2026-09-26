@@ -82,7 +82,7 @@ class MultiplayerClient extends ChangeNotifier {
     try {
       final socket = await WebSocket.connect(
         endpoint,
-      ).timeout(const Duration(seconds: 20));
+      ).timeout(const Duration(seconds: 75));
       _socket = socket;
       _subscription = socket.listen(
         _handleMessage,
