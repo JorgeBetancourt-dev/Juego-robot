@@ -52,7 +52,7 @@ class MultiplayerClient extends ChangeNotifier {
           endpoint ??
           const String.fromEnvironment(
             'MULTIPLAYER_URL',
-            defaultValue: 'ws://10.0.2.2:8080/ws',
+            defaultValue: 'wss://sistema-caido-multiplayer.onrender.com/ws',
           );
 
   final String endpoint;

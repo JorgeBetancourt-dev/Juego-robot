@@ -33,6 +33,10 @@ En una compilación pública se debe usar `wss://`. El servidor mantiene salas
 temporales y públicas de hasta cuatro jugadores; no modifica el guardado de la
 campaña.
 
+La versión de prueba usa por defecto el servicio gratuito:
+`wss://sistema-caido-multiplayer.onrender.com/ws`. Se puede sustituir mediante
+`MULTIPLAYER_URL` para desarrollo local.
+
 ## Controles
 
 - Teclado: `A/D` o flechas para mover, `Space` para saltar, `J` para atacar, `K` para dash y `Esc` para pausar.
