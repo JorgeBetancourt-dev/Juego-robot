@@ -1,0 +1,53 @@
+class GameplayConfig {
+  const GameplayConfig({
+    this.maxRunSpeed = 240,
+    this.groundAcceleration = 2200,
+    this.groundDeceleration = 2600,
+    this.airAcceleration = 1300,
+    this.jumpSpeed = 598,
+    this.gravityRise = 1450,
+    this.gravityFall = 2100,
+    this.maxFallSpeed = 780,
+    this.coyoteTime = 0.10,
+    this.jumpBuffer = 0.12,
+    this.dashSpeed = 620,
+    this.dashDuration = 0.16,
+    this.dashCooldown = 0.20,
+    this.wallSlideSpeed = 140,
+    this.wallJumpX = 300,
+    this.wallJumpY = 500,
+    this.downStrikeSpeed = 680,
+    this.attackStartup = 0.06,
+    this.attackActive = 0.09,
+    this.attackRecovery = 0.16,
+    this.hurtInvulnerability = 0.85,
+    this.hurtStun = 0.18,
+    this.playerWidth = 28,
+    this.playerHeight = 42,
+  });
+
+  final double maxRunSpeed;
+  final double groundAcceleration;
+  final double groundDeceleration;
+  final double airAcceleration;
+  final double jumpSpeed;
+  final double gravityRise;
+  final double gravityFall;
+  final double maxFallSpeed;
+  final double coyoteTime;
+  final double jumpBuffer;
+  final double dashSpeed;
+  final double dashDuration;
+  final double dashCooldown;
+  final double wallSlideSpeed;
+  final double wallJumpX;
+  final double wallJumpY;
+  final double downStrikeSpeed;
+  final double attackStartup;
+  final double attackActive;
+  final double attackRecovery;
+  final double hurtInvulnerability;
+  final double hurtStun;
+  final double playerWidth;
+  final double playerHeight;
+}

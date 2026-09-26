@@ -1,0 +1,70 @@
+name: game_final
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.6.0+8
+
+environment:
+  sdk: ^3.12.2
+
+dependencies:
+  flame: ^1.38.2
+  flutter:
+    sdk: flutter
+  shared_preferences: ^2.5.5
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/audio/
+    - assets/environment/
+    - assets/maps/
+    - assets/sprites/m0/idle/
+    - assets/sprites/m0/run/
+    - assets/sprites/m0/rise/
+    - assets/sprites/m0/fall/
+    - assets/sprites/m0/land/
+    - assets/sprites/m0/attack/
+    - assets/sprites/m0/dash/
+    - assets/sprites/m0/wall_slide/
+    - assets/sprites/m0/wall_jump/
+    - assets/sprites/m0/double_jump/
+    - assets/sprites/m0/down_strike/
+    - assets/sprites/m0/hurt/
+    - assets/sprites/m0/death/
+    - assets/sprites/m0/respawn/
+    - assets/sprites/patrol/idle/
+    - assets/sprites/patrol/walk/
+    - assets/sprites/patrol/turn/
+    - assets/sprites/patrol/attack/
+    - assets/sprites/patrol/hurt/
+    - assets/sprites/patrol/death/
+    - assets/sprites/watcher/idle/
+    - assets/sprites/watcher/detect/
+    - assets/sprites/watcher/aim/
+    - assets/sprites/watcher/shoot/
+    - assets/sprites/watcher/cooldown/
+    - assets/sprites/watcher_projectile/fly/
+    - assets/sprites/watcher_projectile/impact/
+    - assets/sprites/drone/idle/
+    - assets/sprites/drone/patrol/
+    - assets/sprites/drone/turn/
+    - assets/sprites/drone/shoot/
+    - assets/sprites/drone/charge/
+    - assets/sprites/drone/hurt/
+    - assets/sprites/drone/death/
+    - assets/sprites/drone_projectile/fly/
+    - assets/sprites/volt/idle/
+    - assets/sprites/volt/walk/
+    - assets/sprites/volt/core_charge/
+    - assets/sprites/volt/ground_slam/
+    - assets/sprites/volt/missile_launch/
+    - assets/sprites/volt/missile_projectile/
+    - assets/sprites/volt/missile_impact/
+    - assets/sprites/volt/vulnerable/
+    - assets/sprites/volt/hurt/
+    - assets/sprites/volt/defeat/

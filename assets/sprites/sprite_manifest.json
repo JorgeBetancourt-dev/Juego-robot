@@ -1,0 +1,483 @@
+{
+  "version": 1,
+  "characters": {
+    "m0": {
+      "canvas": [
+        144,
+        88
+      ],
+      "source": "assets/source_sheets/M-0.png",
+      "animations": {
+        "idle": {
+          "frames": [
+            "assets/sprites/m0/idle/frame_00.png",
+            "assets/sprites/m0/idle/frame_01.png",
+            "assets/sprites/m0/idle/frame_02.png",
+            "assets/sprites/m0/idle/frame_03.png",
+            "assets/sprites/m0/idle/frame_04.png"
+          ],
+          "frame_time": 0.14
+        },
+        "run": {
+          "frames": [
+            "assets/sprites/m0/run/frame_00.png",
+            "assets/sprites/m0/run/frame_01.png",
+            "assets/sprites/m0/run/frame_02.png",
+            "assets/sprites/m0/run/frame_03.png",
+            "assets/sprites/m0/run/frame_04.png",
+            "assets/sprites/m0/run/frame_05.png"
+          ],
+          "frame_time": 0.1
+        },
+        "rise": {
+          "frames": [
+            "assets/sprites/m0/rise/frame_00.png",
+            "assets/sprites/m0/rise/frame_01.png",
+            "assets/sprites/m0/rise/frame_02.png"
+          ],
+          "frame_time": 0.1
+        },
+        "fall": {
+          "frames": [
+            "assets/sprites/m0/fall/frame_00.png",
+            "assets/sprites/m0/fall/frame_01.png",
+            "assets/sprites/m0/fall/frame_02.png",
+            "assets/sprites/m0/fall/frame_03.png"
+          ],
+          "frame_time": 0.1
+        },
+        "land": {
+          "frames": [
+            "assets/sprites/m0/land/frame_00.png",
+            "assets/sprites/m0/land/frame_01.png",
+            "assets/sprites/m0/land/frame_02.png"
+          ],
+          "frame_time": 0.1
+        },
+        "attack": {
+          "frames": [
+            "assets/sprites/m0/attack/frame_00.png",
+            "assets/sprites/m0/attack/frame_01.png",
+            "assets/sprites/m0/attack/frame_02.png",
+            "assets/sprites/m0/attack/frame_03.png"
+          ],
+          "frame_time": 0.1
+        },
+        "dash": {
+          "frames": [
+            "assets/sprites/m0/dash/frame_00.png",
+            "assets/sprites/m0/dash/frame_01.png",
+            "assets/sprites/m0/dash/frame_02.png"
+          ],
+          "frame_time": 0.1
+        },
+        "wall_slide": {
+          "frames": [
+            "assets/sprites/m0/wall_slide/frame_00.png",
+            "assets/sprites/m0/wall_slide/frame_01.png"
+          ],
+          "frame_time": 0.1
+        },
+        "wall_jump": {
+          "frames": [
+            "assets/sprites/m0/wall_jump/frame_00.png",
+            "assets/sprites/m0/wall_jump/frame_01.png",
+            "assets/sprites/m0/wall_jump/frame_02.png"
+          ],
+          "frame_time": 0.1
+        },
+        "double_jump": {
+          "frames": [
+            "assets/sprites/m0/double_jump/frame_00.png",
+            "assets/sprites/m0/double_jump/frame_01.png",
+            "assets/sprites/m0/double_jump/frame_02.png",
+            "assets/sprites/m0/double_jump/frame_03.png"
+          ],
+          "frame_time": 0.1
+        },
+        "down_strike": {
+          "frames": [
+            "assets/sprites/m0/down_strike/frame_00.png",
+            "assets/sprites/m0/down_strike/frame_01.png",
+            "assets/sprites/m0/down_strike/frame_02.png"
+          ],
+          "frame_time": 0.1
+        },
+        "hurt": {
+          "frames": [
+            "assets/sprites/m0/hurt/frame_00.png",
+            "assets/sprites/m0/hurt/frame_01.png",
+            "assets/sprites/m0/hurt/frame_02.png"
+          ],
+          "frame_time": 0.1
+        },
+        "death": {
+          "frames": [
+            "assets/sprites/m0/death/frame_00.png",
+            "assets/sprites/m0/death/frame_01.png",
+            "assets/sprites/m0/death/frame_02.png",
+            "assets/sprites/m0/death/frame_03.png"
+          ],
+          "frame_time": 0.1
+        },
+        "respawn": {
+          "frames": [
+            "assets/sprites/m0/respawn/frame_00.png",
+            "assets/sprites/m0/respawn/frame_01.png",
+            "assets/sprites/m0/respawn/frame_02.png",
+            "assets/sprites/m0/respawn/frame_03.png"
+          ],
+          "frame_time": 0.1
+        }
+      }
+    },
+    "patrol": {
+      "canvas": [
+        128,
+        76
+      ],
+      "source": "assets/source_sheets/Patrol Unit.png",
+      "animations": {
+        "idle": {
+          "frames": [
+            "assets/sprites/patrol/idle/frame_00.png",
+            "assets/sprites/patrol/idle/frame_01.png",
+            "assets/sprites/patrol/idle/frame_02.png",
+            "assets/sprites/patrol/idle/frame_03.png"
+          ],
+          "frame_time": 0.14
+        },
+        "walk": {
+          "frames": [
+            "assets/sprites/patrol/walk/frame_00.png",
+            "assets/sprites/patrol/walk/frame_01.png",
+            "assets/sprites/patrol/walk/frame_02.png",
+            "assets/sprites/patrol/walk/frame_03.png",
+            "assets/sprites/patrol/walk/frame_04.png",
+            "assets/sprites/patrol/walk/frame_05.png"
+          ],
+          "frame_time": 0.14
+        },
+        "turn": {
+          "frames": [
+            "assets/sprites/patrol/turn/frame_00.png",
+            "assets/sprites/patrol/turn/frame_01.png",
+            "assets/sprites/patrol/turn/frame_02.png",
+            "assets/sprites/patrol/turn/frame_03.png"
+          ],
+          "frame_time": 0.1
+        },
+        "attack": {
+          "frames": [
+            "assets/sprites/patrol/attack/frame_00.png",
+            "assets/sprites/patrol/attack/frame_01.png",
+            "assets/sprites/patrol/attack/frame_02.png",
+            "assets/sprites/patrol/attack/frame_03.png",
+            "assets/sprites/patrol/attack/frame_04.png"
+          ],
+          "frame_time": 0.1
+        },
+        "hurt": {
+          "frames": [
+            "assets/sprites/patrol/hurt/frame_00.png",
+            "assets/sprites/patrol/hurt/frame_01.png",
+            "assets/sprites/patrol/hurt/frame_02.png",
+            "assets/sprites/patrol/hurt/frame_03.png"
+          ],
+          "frame_time": 0.1
+        },
+        "death": {
+          "frames": [
+            "assets/sprites/patrol/death/frame_00.png",
+            "assets/sprites/patrol/death/frame_01.png",
+            "assets/sprites/patrol/death/frame_02.png",
+            "assets/sprites/patrol/death/frame_03.png",
+            "assets/sprites/patrol/death/frame_04.png"
+          ],
+          "frame_time": 0.1
+        }
+      }
+    },
+    "watcher": {
+      "canvas": [
+        96,
+        104
+      ],
+      "source": "assets/source_sheets/Watcher.png",
+      "animations": {
+        "idle": {
+          "frames": [
+            "assets/sprites/watcher/idle/frame_00.png",
+            "assets/sprites/watcher/idle/frame_01.png",
+            "assets/sprites/watcher/idle/frame_02.png",
+            "assets/sprites/watcher/idle/frame_03.png"
+          ],
+          "frame_time": 0.14
+        },
+        "detect": {
+          "frames": [
+            "assets/sprites/watcher/detect/frame_00.png",
+            "assets/sprites/watcher/detect/frame_01.png",
+            "assets/sprites/watcher/detect/frame_02.png",
+            "assets/sprites/watcher/detect/frame_03.png"
+          ],
+          "frame_time": 0.1
+        },
+        "aim": {
+          "frames": [
+            "assets/sprites/watcher/aim/frame_00.png",
+            "assets/sprites/watcher/aim/frame_01.png",
+            "assets/sprites/watcher/aim/frame_02.png",
+            "assets/sprites/watcher/aim/frame_03.png"
+          ],
+          "frame_time": 0.1
+        },
+        "shoot": {
+          "frames": [
+            "assets/sprites/watcher/shoot/frame_00.png",
+            "assets/sprites/watcher/shoot/frame_01.png",
+            "assets/sprites/watcher/shoot/frame_02.png",
+            "assets/sprites/watcher/shoot/frame_03.png"
+          ],
+          "frame_time": 0.1
+        },
+        "cooldown": {
+          "frames": [
+            "assets/sprites/watcher/cooldown/frame_00.png",
+            "assets/sprites/watcher/cooldown/frame_01.png",
+            "assets/sprites/watcher/cooldown/frame_02.png",
+            "assets/sprites/watcher/cooldown/frame_03.png",
+            "assets/sprites/watcher/cooldown/frame_04.png"
+          ],
+          "frame_time": 0.1
+        }
+      }
+    },
+    "watcher_projectile": {
+      "canvas": [
+        40,
+        32
+      ],
+      "source": "assets/source_sheets/Watcher.png",
+      "animations": {
+        "fly": {
+          "frames": [
+            "assets/sprites/watcher_projectile/fly/frame_00.png",
+            "assets/sprites/watcher_projectile/fly/frame_01.png",
+            "assets/sprites/watcher_projectile/fly/frame_02.png",
+            "assets/sprites/watcher_projectile/fly/frame_03.png",
+            "assets/sprites/watcher_projectile/fly/frame_04.png"
+          ],
+          "frame_time": 0.1
+        },
+        "impact": {
+          "frames": [
+            "assets/sprites/watcher_projectile/impact/frame_00.png",
+            "assets/sprites/watcher_projectile/impact/frame_01.png",
+            "assets/sprites/watcher_projectile/impact/frame_02.png",
+            "assets/sprites/watcher_projectile/impact/frame_03.png",
+            "assets/sprites/watcher_projectile/impact/frame_04.png"
+          ],
+          "frame_time": 0.1
+        }
+      }
+    },
+    "drone": {
+      "canvas": [
+        112,
+        76
+      ],
+      "source": "assets/source_sheets/Drone.png",
+      "animations": {
+        "idle": {
+          "frames": [
+            "assets/sprites/drone/idle/frame_00.png",
+            "assets/sprites/drone/idle/frame_01.png",
+            "assets/sprites/drone/idle/frame_02.png",
+            "assets/sprites/drone/idle/frame_03.png",
+            "assets/sprites/drone/idle/frame_04.png",
+            "assets/sprites/drone/idle/frame_05.png"
+          ],
+          "frame_time": 0.14
+        },
+        "patrol": {
+          "frames": [
+            "assets/sprites/drone/patrol/frame_00.png",
+            "assets/sprites/drone/patrol/frame_01.png",
+            "assets/sprites/drone/patrol/frame_02.png",
+            "assets/sprites/drone/patrol/frame_03.png",
+            "assets/sprites/drone/patrol/frame_04.png"
+          ],
+          "frame_time": 0.14
+        },
+        "turn": {
+          "frames": [
+            "assets/sprites/drone/turn/frame_00.png",
+            "assets/sprites/drone/turn/frame_01.png",
+            "assets/sprites/drone/turn/frame_02.png",
+            "assets/sprites/drone/turn/frame_03.png",
+            "assets/sprites/drone/turn/frame_04.png"
+          ],
+          "frame_time": 0.1
+        },
+        "shoot": {
+          "frames": [
+            "assets/sprites/drone/shoot/frame_00.png",
+            "assets/sprites/drone/shoot/frame_01.png",
+            "assets/sprites/drone/shoot/frame_02.png"
+          ],
+          "frame_time": 0.1
+        },
+        "charge": {
+          "frames": [
+            "assets/sprites/drone/charge/frame_00.png",
+            "assets/sprites/drone/charge/frame_01.png",
+            "assets/sprites/drone/charge/frame_02.png",
+            "assets/sprites/drone/charge/frame_03.png",
+            "assets/sprites/drone/charge/frame_04.png"
+          ],
+          "frame_time": 0.1
+        },
+        "hurt": {
+          "frames": [
+            "assets/sprites/drone/hurt/frame_00.png",
+            "assets/sprites/drone/hurt/frame_01.png",
+            "assets/sprites/drone/hurt/frame_02.png",
+            "assets/sprites/drone/hurt/frame_03.png",
+            "assets/sprites/drone/hurt/frame_04.png"
+          ],
+          "frame_time": 0.1
+        },
+        "death": {
+          "frames": [
+            "assets/sprites/drone/death/frame_00.png",
+            "assets/sprites/drone/death/frame_01.png",
+            "assets/sprites/drone/death/frame_02.png",
+            "assets/sprites/drone/death/frame_03.png",
+            "assets/sprites/drone/death/frame_04.png",
+            "assets/sprites/drone/death/frame_05.png"
+          ],
+          "frame_time": 0.1
+        }
+      }
+    },
+    "drone_projectile": {
+      "canvas": [
+        36,
+        28
+      ],
+      "source": "assets/source_sheets/Drone.png",
+      "animations": {
+        "fly": {
+          "frames": [
+            "assets/sprites/drone_projectile/fly/frame_00.png",
+            "assets/sprites/drone_projectile/fly/frame_01.png",
+            "assets/sprites/drone_projectile/fly/frame_02.png",
+            "assets/sprites/drone_projectile/fly/frame_03.png",
+            "assets/sprites/drone_projectile/fly/frame_04.png",
+            "assets/sprites/drone_projectile/fly/frame_05.png"
+          ],
+          "frame_time": 0.1
+        }
+      }
+    },
+    "volt": {
+      "canvas": [
+        192,
+        256
+      ],
+      "source": "assets/source_sheets/volt/",
+      "animations": {
+        "idle": {
+          "frames": [
+            "assets/sprites/volt/idle/idle_breathe_01.png",
+            "assets/sprites/volt/idle/idle_breathe_02.png",
+            "assets/sprites/volt/idle/idle_breathe_03.png",
+            "assets/sprites/volt/idle/idle_breathe_04.png",
+            "assets/sprites/volt/idle/idle_breathe_05.png"
+          ],
+          "frame_time": 0.16
+        },
+        "walk": {
+          "frames": [
+            "assets/sprites/volt/walk/walk_step_01.png",
+            "assets/sprites/volt/walk/walk_step_02.png",
+            "assets/sprites/volt/walk/walk_step_03.png",
+            "assets/sprites/volt/walk/walk_step_04.png",
+            "assets/sprites/volt/walk/walk_step_05.png",
+            "assets/sprites/volt/walk/walk_step_06.png"
+          ],
+          "frame_time": 0.16
+        },
+        "core_charge": {
+          "frames": [
+            "assets/sprites/volt/core_charge/core_charge_01.png",
+            "assets/sprites/volt/core_charge/core_charge_02.png",
+            "assets/sprites/volt/core_charge/core_charge_03.png",
+            "assets/sprites/volt/core_charge/core_charge_04.png",
+            "assets/sprites/volt/core_charge/core_charge_05.png"
+          ],
+          "frame_time": 0.18
+        },
+        "ground_slam": {
+          "frames": [
+            "assets/sprites/volt/ground_slam/ground_slam_raise.png",
+            "assets/sprites/volt/ground_slam/ground_slam_windup.png",
+            "assets/sprites/volt/ground_slam/ground_slam_descend.png",
+            "assets/sprites/volt/ground_slam/ground_slam_impact_01.png",
+            "assets/sprites/volt/ground_slam/ground_slam_impact_02.png"
+          ],
+          "frame_time": 0.18
+        },
+        "missile_launch": {
+          "frames": [
+            "assets/sprites/volt/missile_launch/missile_launcher_ready.png",
+            "assets/sprites/volt/missile_launch/missile_launcher_fire.png"
+          ],
+          "frame_time": 0.18
+        },
+        "missile_projectile": {
+          "frames": [
+            "assets/sprites/volt/missile_projectile/missile_projectile_flight_01.png",
+            "assets/sprites/volt/missile_projectile/missile_projectile_flight_02.png",
+            "assets/sprites/volt/missile_projectile/missile_projectile_flight_03.png"
+          ],
+          "frame_time": 0.14
+        },
+        "missile_impact": {
+          "frames": [
+            "assets/sprites/volt/missile_impact/missile_impact_01.png",
+            "assets/sprites/volt/missile_impact/missile_impact_02.png",
+            "assets/sprites/volt/missile_impact/missile_impact_03.png"
+          ],
+          "frame_time": 0.14
+        },
+        "vulnerable": {
+          "frames": [
+            "assets/sprites/volt/vulnerable/vulnerable_core_open_01.png",
+            "assets/sprites/volt/vulnerable/vulnerable_core_open_02.png",
+            "assets/sprites/volt/vulnerable/vulnerable_core_open_03.png"
+          ],
+          "frame_time": 0.18
+        },
+        "hurt": {
+          "frames": [
+            "assets/sprites/volt/hurt/hurt_recoil_01.png",
+            "assets/sprites/volt/hurt/hurt_recoil_02.png",
+            "assets/sprites/volt/hurt/hurt_recoil_03.png"
+          ],
+          "frame_time": 0.18
+        },
+        "defeat": {
+          "frames": [
+            "assets/sprites/volt/defeat/defeat_stagger.png",
+            "assets/sprites/volt/defeat/defeat_collapse_01.png",
+            "assets/sprites/volt/defeat/defeat_collapse_02.png",
+            "assets/sprites/volt/defeat/defeat_destroyed.png"
+          ],
+          "frame_time": 0.22
+        }
+      }
+    }
+  }
+}

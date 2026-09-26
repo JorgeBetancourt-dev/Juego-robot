@@ -1,0 +1,51 @@
+{
+  "core_charge": {
+    "core_charge_01": 161,
+    "core_charge_02": 161,
+    "core_charge_03": 161,
+    "core_charge_04": 161,
+    "core_charge_05": 161
+  },
+  "defeat": {
+    "defeat_stagger": 166,
+    "defeat_collapse_01": 160,
+    "defeat_collapse_02": 161,
+    "defeat_destroyed": 161
+  },
+  "ground_slam": {
+    "ground_slam_raise": 160,
+    "ground_slam_windup": 160,
+    "ground_slam_descend": 160,
+    "ground_slam_impact_01": 161,
+    "ground_slam_impact_02": 160
+  },
+  "hurt": {
+    "hurt_recoil_01": 160,
+    "hurt_recoil_02": 161,
+    "hurt_recoil_03": 161
+  },
+  "idle": {
+    "idle_breathe_01": 161,
+    "idle_breathe_02": 161,
+    "idle_breathe_03": 161,
+    "idle_breathe_04": 161,
+    "idle_breathe_05": 161
+  },
+  "missile_launch": {
+    "missile_launcher_ready": 161,
+    "missile_launcher_fire": 161
+  },
+  "vulnerable": {
+    "vulnerable_core_open_01": 161,
+    "vulnerable_core_open_02": 160,
+    "vulnerable_core_open_03": 161
+  },
+  "walk": {
+    "walk_step_01": 161,
+    "walk_step_02": 161,
+    "walk_step_03": 161,
+    "walk_step_04": 161,
+    "walk_step_05": 160,
+    "walk_step_06": 161
+  }
+}

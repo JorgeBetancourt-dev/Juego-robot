@@ -1,0 +1,61 @@
+{
+  "idle": [
+    "idle_breathe_01",
+    "idle_breathe_02",
+    "idle_breathe_03",
+    "idle_breathe_04",
+    "idle_breathe_05"
+  ],
+  "walk": [
+    "walk_step_01",
+    "walk_step_02",
+    "walk_step_03",
+    "walk_step_04",
+    "walk_step_05",
+    "walk_step_06"
+  ],
+  "core_charge": [
+    "core_charge_01",
+    "core_charge_02",
+    "core_charge_03",
+    "core_charge_04",
+    "core_charge_05"
+  ],
+  "ground_slam": [
+    "ground_slam_raise",
+    "ground_slam_windup",
+    "ground_slam_descend",
+    "ground_slam_impact_01",
+    "ground_slam_impact_02"
+  ],
+  "missile_launch": [
+    "missile_launcher_ready",
+    "missile_launcher_fire"
+  ],
+  "missile_projectile": [
+    "missile_projectile_flight_01",
+    "missile_projectile_flight_02",
+    "missile_projectile_flight_03"
+  ],
+  "missile_impact": [
+    "missile_impact_01",
+    "missile_impact_02",
+    "missile_impact_03"
+  ],
+  "vulnerable": [
+    "vulnerable_core_open_01",
+    "vulnerable_core_open_02",
+    "vulnerable_core_open_03"
+  ],
+  "hurt": [
+    "hurt_recoil_01",
+    "hurt_recoil_02",
+    "hurt_recoil_03"
+  ],
+  "defeat": [
+    "defeat_stagger",
+    "defeat_collapse_01",
+    "defeat_collapse_02",
+    "defeat_destroyed"
+  ]
+}

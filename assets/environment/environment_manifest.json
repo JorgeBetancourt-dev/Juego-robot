@@ -1,0 +1,1670 @@
+{
+  "version": 1,
+  "assets": {
+    "tile_normal": {
+      "path": "assets/environment/tile_normal.png",
+      "size": [
+        32,
+        32
+      ],
+      "source": "Plataformas.png",
+      "crop": [
+        1007,
+        79,
+        1088,
+        168
+      ],
+      "mode": "opaque"
+    },
+    "tile_worn": {
+      "path": "assets/environment/tile_worn.png",
+      "size": [
+        32,
+        32
+      ],
+      "source": "Plataformas.png",
+      "crop": [
+        1105,
+        79,
+        1195,
+        168
+      ],
+      "mode": "opaque"
+    },
+    "tile_cables": {
+      "path": "assets/environment/tile_cables.png",
+      "size": [
+        32,
+        32
+      ],
+      "source": "Plataformas.png",
+      "crop": [
+        1207,
+        79,
+        1296,
+        168
+      ],
+      "mode": "opaque"
+    },
+    "tile_light": {
+      "path": "assets/environment/tile_light.png",
+      "size": [
+        32,
+        32
+      ],
+      "source": "Plataformas.png",
+      "crop": [
+        1312,
+        79,
+        1400,
+        168
+      ],
+      "mode": "opaque"
+    },
+    "tile_wet": {
+      "path": "assets/environment/tile_wet.png",
+      "size": [
+        32,
+        32
+      ],
+      "source": "Plataformas.png",
+      "crop": [
+        1415,
+        79,
+        1504,
+        168
+      ],
+      "mode": "opaque"
+    },
+    "platform_full": {
+      "path": "assets/environment/platform_full.png",
+      "size": [
+        160,
+        40
+      ],
+      "source": "Plataformas.png",
+      "crop": [
+        39,
+        318,
+        284,
+        374
+      ],
+      "mode": "transparent"
+    },
+    "platform_start": {
+      "path": "assets/environment/platform_start.png",
+      "size": [
+        64,
+        40
+      ],
+      "source": "Plataformas.png",
+      "crop": [
+        334,
+        318,
+        437,
+        376
+      ],
+      "mode": "transparent"
+    },
+    "platform_center": {
+      "path": "assets/environment/platform_center.png",
+      "size": [
+        80,
+        40
+      ],
+      "source": "Plataformas.png",
+      "crop": [
+        485,
+        318,
+        604,
+        376
+      ],
+      "mode": "transparent"
+    },
+    "platform_end": {
+      "path": "assets/environment/platform_end.png",
+      "size": [
+        72,
+        40
+      ],
+      "source": "Plataformas.png",
+      "crop": [
+        683,
+        318,
+        798,
+        376
+      ],
+      "mode": "transparent"
+    },
+    "platform_small": {
+      "path": "assets/environment/platform_small.png",
+      "size": [
+        64,
+        40
+      ],
+      "source": "Plataformas.png",
+      "crop": [
+        459,
+        583,
+        558,
+        641
+      ],
+      "mode": "transparent"
+    },
+    "platform_medium": {
+      "path": "assets/environment/platform_medium.png",
+      "size": [
+        128,
+        40
+      ],
+      "source": "Plataformas.png",
+      "crop": [
+        624,
+        583,
+        824,
+        641
+      ],
+      "mode": "transparent"
+    },
+    "platform_grate": {
+      "path": "assets/environment/platform_grate.png",
+      "size": [
+        128,
+        64
+      ],
+      "source": "Plataformas.png",
+      "crop": [
+        883,
+        297,
+        1056,
+        389
+      ],
+      "mode": "transparent"
+    },
+    "platform_glow": {
+      "path": "assets/environment/platform_glow.png",
+      "size": [
+        128,
+        64
+      ],
+      "source": "Plataformas.png",
+      "crop": [
+        1103,
+        297,
+        1285,
+        396
+      ],
+      "mode": "transparent"
+    },
+    "platform_suspended": {
+      "path": "assets/environment/platform_suspended.png",
+      "size": [
+        128,
+        72
+      ],
+      "source": "Plataformas.png",
+      "crop": [
+        1325,
+        291,
+        1501,
+        398
+      ],
+      "mode": "transparent"
+    },
+    "platform_support": {
+      "path": "assets/environment/platform_support.png",
+      "size": [
+        112,
+        120
+      ],
+      "source": "Plataformas.png",
+      "crop": [
+        887,
+        466,
+        1050,
+        641
+      ],
+      "mode": "transparent"
+    },
+    "platform_pipes": {
+      "path": "assets/environment/platform_pipes.png",
+      "size": [
+        128,
+        120
+      ],
+      "source": "Plataformas.png",
+      "crop": [
+        1098,
+        463,
+        1290,
+        641
+      ],
+      "mode": "transparent"
+    },
+    "platform_broken": {
+      "path": "assets/environment/platform_broken.png",
+      "size": [
+        128,
+        120
+      ],
+      "source": "Plataformas.png",
+      "crop": [
+        1334,
+        463,
+        1502,
+        641
+      ],
+      "mode": "transparent"
+    },
+    "door_closed": {
+      "path": "assets/environment/door_closed.png",
+      "size": [
+        80,
+        112
+      ],
+      "source": "Elementos interactivos.png",
+      "crop": [
+        29,
+        263,
+        139,
+        391
+      ],
+      "mode": "transparent"
+    },
+    "door_opening": {
+      "path": "assets/environment/door_opening.png",
+      "size": [
+        80,
+        112
+      ],
+      "source": "Elementos interactivos.png",
+      "crop": [
+        153,
+        263,
+        273,
+        391
+      ],
+      "mode": "transparent"
+    },
+    "door_open": {
+      "path": "assets/environment/door_open.png",
+      "size": [
+        80,
+        112
+      ],
+      "source": "Elementos interactivos.png",
+      "crop": [
+        286,
+        263,
+        405,
+        391
+      ],
+      "mode": "transparent"
+    },
+    "door_blocked": {
+      "path": "assets/environment/door_blocked.png",
+      "size": [
+        80,
+        112
+      ],
+      "source": "Elementos interactivos.png",
+      "crop": [
+        427,
+        263,
+        535,
+        391
+      ],
+      "mode": "transparent"
+    },
+    "door_unlocking": {
+      "path": "assets/environment/door_unlocking.png",
+      "size": [
+        80,
+        112
+      ],
+      "source": "Elementos interactivos.png",
+      "crop": [
+        548,
+        263,
+        659,
+        391
+      ],
+      "mode": "transparent"
+    },
+    "switch_inactive": {
+      "path": "assets/environment/switch_inactive.png",
+      "size": [
+        64,
+        64
+      ],
+      "source": "Elementos interactivos.png",
+      "crop": [
+        804,
+        281,
+        900,
+        383
+      ],
+      "mode": "transparent"
+    },
+    "switch_active": {
+      "path": "assets/environment/switch_active.png",
+      "size": [
+        64,
+        64
+      ],
+      "source": "Elementos interactivos.png",
+      "crop": [
+        907,
+        281,
+        1002,
+        383
+      ],
+      "mode": "transparent"
+    },
+    "checkpoint_inactive": {
+      "path": "assets/environment/checkpoint_inactive.png",
+      "size": [
+        88,
+        128
+      ],
+      "source": "Elementos interactivos.png",
+      "crop": [
+        43,
+        487,
+        150,
+        642
+      ],
+      "mode": "transparent"
+    },
+    "checkpoint_activating": {
+      "path": "assets/environment/checkpoint_activating.png",
+      "size": [
+        88,
+        128
+      ],
+      "source": "Elementos interactivos.png",
+      "crop": [
+        164,
+        487,
+        278,
+        642
+      ],
+      "mode": "transparent"
+    },
+    "checkpoint_active": {
+      "path": "assets/environment/checkpoint_active.png",
+      "size": [
+        88,
+        128
+      ],
+      "source": "Elementos interactivos.png",
+      "crop": [
+        287,
+        487,
+        405,
+        642
+      ],
+      "mode": "transparent"
+    },
+    "moving_platform_left": {
+      "path": "assets/environment/moving_platform_left.png",
+      "size": [
+        128,
+        64
+      ],
+      "source": "Elementos interactivos.png",
+      "crop": [
+        437,
+        548,
+        559,
+        631
+      ],
+      "mode": "transparent"
+    },
+    "moving_platform_center": {
+      "path": "assets/environment/moving_platform_center.png",
+      "size": [
+        128,
+        64
+      ],
+      "source": "Elementos interactivos.png",
+      "crop": [
+        562,
+        548,
+        691,
+        631
+      ],
+      "mode": "transparent"
+    },
+    "moving_platform_right": {
+      "path": "assets/environment/moving_platform_right.png",
+      "size": [
+        128,
+        64
+      ],
+      "source": "Elementos interactivos.png",
+      "crop": [
+        694,
+        548,
+        816,
+        631
+      ],
+      "mode": "transparent"
+    },
+    "spikes_inactive": {
+      "path": "assets/environment/spikes_inactive.png",
+      "size": [
+        128,
+        64
+      ],
+      "source": "Elementos interactivos.png",
+      "crop": [
+        601,
+        752,
+        744,
+        825
+      ],
+      "mode": "transparent"
+    },
+    "spikes_active": {
+      "path": "assets/environment/spikes_active.png",
+      "size": [
+        128,
+        64
+      ],
+      "source": "Elementos interactivos.png",
+      "crop": [
+        741,
+        739,
+        882,
+        825
+      ],
+      "mode": "transparent"
+    },
+    "laser_inactive": {
+      "path": "assets/environment/laser_inactive.png",
+      "size": [
+        128,
+        64
+      ],
+      "source": "Elementos interactivos.png",
+      "crop": [
+        890,
+        744,
+        1014,
+        825
+      ],
+      "mode": "transparent"
+    },
+    "laser_active": {
+      "path": "assets/environment/laser_active.png",
+      "size": [
+        160,
+        64
+      ],
+      "source": "Elementos interactivos.png",
+      "crop": [
+        1019,
+        744,
+        1182,
+        825
+      ],
+      "mode": "transparent"
+    },
+    "electric_floor_inactive": {
+      "path": "assets/environment/electric_floor_inactive.png",
+      "size": [
+        128,
+        64
+      ],
+      "source": "Elementos interactivos.png",
+      "crop": [
+        601,
+        885,
+        752,
+        978
+      ],
+      "mode": "transparent"
+    },
+    "electric_floor_active": {
+      "path": "assets/environment/electric_floor_active.png",
+      "size": [
+        128,
+        64
+      ],
+      "source": "Elementos interactivos.png",
+      "crop": [
+        757,
+        874,
+        912,
+        978
+      ],
+      "mode": "transparent"
+    },
+    "collectible_idle": {
+      "path": "assets/environment/collectible_idle.png",
+      "size": [
+        64,
+        72
+      ],
+      "source": "Elementos interactivos.png",
+      "crop": [
+        1210,
+        752,
+        1298,
+        866
+      ],
+      "mode": "transparent"
+    },
+    "collectible_rotate": {
+      "path": "assets/environment/collectible_rotate.png",
+      "size": [
+        64,
+        72
+      ],
+      "source": "Elementos interactivos.png",
+      "crop": [
+        1295,
+        752,
+        1377,
+        866
+      ],
+      "mode": "transparent"
+    },
+    "collectible_collected": {
+      "path": "assets/environment/collectible_collected.png",
+      "size": [
+        64,
+        72
+      ],
+      "source": "Elementos interactivos.png",
+      "crop": [
+        1373,
+        752,
+        1450,
+        866
+      ],
+      "mode": "transparent"
+    },
+    "module_idle": {
+      "path": "assets/environment/module_idle.png",
+      "size": [
+        64,
+        64
+      ],
+      "source": "Elementos interactivos.png",
+      "crop": [
+        1209,
+        890,
+        1292,
+        978
+      ],
+      "mode": "transparent"
+    },
+    "module_rotate": {
+      "path": "assets/environment/module_rotate.png",
+      "size": [
+        64,
+        64
+      ],
+      "source": "Elementos interactivos.png",
+      "crop": [
+        1297,
+        890,
+        1378,
+        978
+      ],
+      "mode": "transparent"
+    },
+    "module_collected": {
+      "path": "assets/environment/module_collected.png",
+      "size": [
+        64,
+        64
+      ],
+      "source": "Elementos interactivos.png",
+      "crop": [
+        1380,
+        890,
+        1462,
+        978
+      ],
+      "mode": "transparent"
+    },
+    "infra_pillar": {
+      "path": "assets/environment/infra_pillar.png",
+      "size": [
+        96,
+        224
+      ],
+      "source": "Decoracion de fondos - infraestructura.png",
+      "crop": [
+        36,
+        267,
+        140,
+        508
+      ],
+      "mode": "transparent"
+    },
+    "infra_beam": {
+      "path": "assets/environment/infra_beam.png",
+      "size": [
+        192,
+        80
+      ],
+      "source": "Decoracion de fondos - infraestructura.png",
+      "crop": [
+        166,
+        285,
+        367,
+        372
+      ],
+      "mode": "transparent"
+    },
+    "infra_support": {
+      "path": "assets/environment/infra_support.png",
+      "size": [
+        112,
+        208
+      ],
+      "source": "Decoracion de fondos - infraestructura.png",
+      "crop": [
+        386,
+        286,
+        518,
+        508
+      ],
+      "mode": "transparent"
+    },
+    "infra_bridge": {
+      "path": "assets/environment/infra_bridge.png",
+      "size": [
+        256,
+        72
+      ],
+      "source": "Decoracion de fondos - infraestructura.png",
+      "crop": [
+        174,
+        414,
+        449,
+        496
+      ],
+      "mode": "transparent"
+    },
+    "pipe_straight": {
+      "path": "assets/environment/pipe_straight.png",
+      "size": [
+        144,
+        56
+      ],
+      "source": "Decoracion de fondos - infraestructura.png",
+      "crop": [
+        547,
+        285,
+        703,
+        351
+      ],
+      "mode": "transparent"
+    },
+    "pipe_curve": {
+      "path": "assets/environment/pipe_curve.png",
+      "size": [
+        96,
+        96
+      ],
+      "source": "Decoracion de fondos - infraestructura.png",
+      "crop": [
+        716,
+        265,
+        819,
+        374
+      ],
+      "mode": "transparent"
+    },
+    "pipe_tee": {
+      "path": "assets/environment/pipe_tee.png",
+      "size": [
+        128,
+        96
+      ],
+      "source": "Decoracion de fondos - infraestructura.png",
+      "crop": [
+        851,
+        265,
+        989,
+        377
+      ],
+      "mode": "transparent"
+    },
+    "cables_hanging": {
+      "path": "assets/environment/cables_hanging.png",
+      "size": [
+        144,
+        224
+      ],
+      "source": "Decoracion de fondos - infraestructura.png",
+      "crop": [
+        1017,
+        264,
+        1170,
+        507
+      ],
+      "mode": "transparent"
+    },
+    "cable_conduit": {
+      "path": "assets/environment/cable_conduit.png",
+      "size": [
+        160,
+        128
+      ],
+      "source": "Decoracion de fondos - infraestructura.png",
+      "crop": [
+        1179,
+        301,
+        1356,
+        440
+      ],
+      "mode": "transparent"
+    },
+    "junction_box": {
+      "path": "assets/environment/junction_box.png",
+      "size": [
+        128,
+        208
+      ],
+      "source": "Decoracion de fondos - infraestructura.png",
+      "crop": [
+        1369,
+        270,
+        1512,
+        507
+      ],
+      "mode": "transparent"
+    },
+    "generator_secondary": {
+      "path": "assets/environment/generator_secondary.png",
+      "size": [
+        144,
+        184
+      ],
+      "source": "Decoracion de fondos - infraestructura.png",
+      "crop": [
+        31,
+        579,
+        184,
+        774
+      ],
+      "mode": "transparent"
+    },
+    "control_unit": {
+      "path": "assets/environment/control_unit.png",
+      "size": [
+        128,
+        176
+      ],
+      "source": "Decoracion de fondos - infraestructura.png",
+      "crop": [
+        201,
+        584,
+        345,
+        774
+      ],
+      "mode": "transparent"
+    },
+    "energy_tank": {
+      "path": "assets/environment/energy_tank.png",
+      "size": [
+        144,
+        184
+      ],
+      "source": "Decoracion de fondos - infraestructura.png",
+      "crop": [
+        357,
+        574,
+        504,
+        774
+      ],
+      "mode": "transparent"
+    },
+    "maintenance_panel": {
+      "path": "assets/environment/maintenance_panel.png",
+      "size": [
+        112,
+        80
+      ],
+      "source": "Decoracion de fondos - infraestructura.png",
+      "crop": [
+        535,
+        577,
+        665,
+        674
+      ],
+      "mode": "transparent"
+    },
+    "electrical_box": {
+      "path": "assets/environment/electrical_box.png",
+      "size": [
+        88,
+        96
+      ],
+      "source": "Decoracion de fondos - infraestructura.png",
+      "crop": [
+        691,
+        568,
+        793,
+        681
+      ],
+      "mode": "transparent"
+    },
+    "ventilation_fan": {
+      "path": "assets/environment/ventilation_fan.png",
+      "size": [
+        96,
+        96
+      ],
+      "source": "Decoracion de fondos - infraestructura.png",
+      "crop": [
+        811,
+        568,
+        924,
+        680
+      ],
+      "mode": "transparent"
+    },
+    "wall_grille": {
+      "path": "assets/environment/wall_grille.png",
+      "size": [
+        112,
+        56
+      ],
+      "source": "Decoracion de fondos - infraestructura.png",
+      "crop": [
+        948,
+        599,
+        1081,
+        672
+      ],
+      "mode": "transparent"
+    },
+    "energy_direction_sign": {
+      "path": "assets/environment/energy_direction_sign.png",
+      "size": [
+        128,
+        64
+      ],
+      "source": "Decoracion de fondos - infraestructura.png",
+      "crop": [
+        535,
+        696,
+        671,
+        775
+      ],
+      "mode": "transparent"
+    },
+    "industrial_lamp": {
+      "path": "assets/environment/industrial_lamp.png",
+      "size": [
+        96,
+        72
+      ],
+      "source": "Decoracion de fondos - infraestructura.png",
+      "crop": [
+        684,
+        690,
+        793,
+        778
+      ],
+      "mode": "transparent"
+    },
+    "light_post": {
+      "path": "assets/environment/light_post.png",
+      "size": [
+        64,
+        80
+      ],
+      "source": "Decoracion de fondos - infraestructura.png",
+      "crop": [
+        823,
+        686,
+        905,
+        779
+      ],
+      "mode": "transparent"
+    },
+    "safety_barrier": {
+      "path": "assets/environment/safety_barrier.png",
+      "size": [
+        144,
+        72
+      ],
+      "source": "Decoracion de fondos - infraestructura.png",
+      "crop": [
+        941,
+        688,
+        1091,
+        779
+      ],
+      "mode": "transparent"
+    },
+    "background_far": {
+      "path": "assets/environment/background_far.png",
+      "size": [
+        640,
+        256
+      ],
+      "source": "Decoracion de fondos - infraestructura.png",
+      "crop": [
+        28,
+        850,
+        510,
+        1003
+      ],
+      "mode": "opaque"
+    },
+    "background_mid": {
+      "path": "assets/environment/background_mid.png",
+      "size": [
+        640,
+        256
+      ],
+      "source": "Decoracion de fondos - infraestructura.png",
+      "crop": [
+        520,
+        850,
+        1015,
+        1003
+      ],
+      "mode": "opaque"
+    },
+    "background_near": {
+      "path": "assets/environment/background_near.png",
+      "size": [
+        640,
+        256
+      ],
+      "source": "Decoracion de fondos - infraestructura.png",
+      "crop": [
+        1027,
+        850,
+        1518,
+        1003
+      ],
+      "mode": "opaque"
+    },
+    "generator_main": {
+      "path": "assets/environment/generator_main.png",
+      "size": [
+        128,
+        240
+      ],
+      "source": "Decoracion de fondos - electricidad.png",
+      "crop": [
+        26,
+        302,
+        158,
+        555
+      ],
+      "mode": "transparent"
+    },
+    "generator_small": {
+      "path": "assets/environment/generator_small.png",
+      "size": [
+        128,
+        184
+      ],
+      "source": "Decoracion de fondos - electricidad.png",
+      "crop": [
+        168,
+        354,
+        315,
+        555
+      ],
+      "mode": "transparent"
+    },
+    "energy_core": {
+      "path": "assets/environment/energy_core.png",
+      "size": [
+        144,
+        240
+      ],
+      "source": "Decoracion de fondos - electricidad.png",
+      "crop": [
+        311,
+        303,
+        456,
+        555
+      ],
+      "mode": "transparent"
+    },
+    "energy_container": {
+      "path": "assets/environment/energy_container.png",
+      "size": [
+        112,
+        240
+      ],
+      "source": "Decoracion de fondos - electricidad.png",
+      "crop": [
+        461,
+        292,
+        579,
+        555
+      ],
+      "mode": "transparent"
+    },
+    "electric_panel": {
+      "path": "assets/environment/electric_panel.png",
+      "size": [
+        88,
+        104
+      ],
+      "source": "Decoracion de fondos - electricidad.png",
+      "crop": [
+        620,
+        278,
+        716,
+        397
+      ],
+      "mode": "transparent"
+    },
+    "electric_panel_sparks": {
+      "path": "assets/environment/electric_panel_sparks.png",
+      "size": [
+        104,
+        104
+      ],
+      "source": "Decoracion de fondos - electricidad.png",
+      "crop": [
+        750,
+        277,
+        866,
+        397
+      ],
+      "mode": "transparent"
+    },
+    "control_console": {
+      "path": "assets/environment/control_console.png",
+      "size": [
+        136,
+        112
+      ],
+      "source": "Decoracion de fondos - electricidad.png",
+      "crop": [
+        904,
+        279,
+        1053,
+        404
+      ],
+      "mode": "transparent"
+    },
+    "active_cables": {
+      "path": "assets/environment/active_cables.png",
+      "size": [
+        192,
+        120
+      ],
+      "source": "Decoracion de fondos - electricidad.png",
+      "crop": [
+        1103,
+        277,
+        1307,
+        412
+      ],
+      "mode": "transparent"
+    },
+    "damaged_cables": {
+      "path": "assets/environment/damaged_cables.png",
+      "size": [
+        184,
+        120
+      ],
+      "source": "Decoracion de fondos - electricidad.png",
+      "crop": [
+        1318,
+        276,
+        1513,
+        412
+      ],
+      "mode": "transparent"
+    },
+    "spark_small": {
+      "path": "assets/environment/spark_small.png",
+      "size": [
+        80,
+        72
+      ],
+      "source": "Decoracion de fondos - electricidad.png",
+      "crop": [
+        29,
+        649,
+        127,
+        737
+      ],
+      "mode": "transparent"
+    },
+    "spark_large": {
+      "path": "assets/environment/spark_large.png",
+      "size": [
+        80,
+        72
+      ],
+      "source": "Decoracion de fondos - electricidad.png",
+      "crop": [
+        139,
+        649,
+        241,
+        737
+      ],
+      "mode": "transparent"
+    },
+    "arc_horizontal": {
+      "path": "assets/environment/arc_horizontal.png",
+      "size": [
+        112,
+        72
+      ],
+      "source": "Decoracion de fondos - electricidad.png",
+      "crop": [
+        252,
+        649,
+        382,
+        737
+      ],
+      "mode": "transparent"
+    },
+    "arc_vertical": {
+      "path": "assets/environment/arc_vertical.png",
+      "size": [
+        80,
+        72
+      ],
+      "source": "Decoracion de fondos - electricidad.png",
+      "crop": [
+        390,
+        649,
+        491,
+        737
+      ],
+      "mode": "transparent"
+    },
+    "surface_discharge": {
+      "path": "assets/environment/surface_discharge.png",
+      "size": [
+        160,
+        72
+      ],
+      "source": "Decoracion de fondos - electricidad.png",
+      "crop": [
+        503,
+        649,
+        689,
+        737
+      ],
+      "mode": "transparent"
+    },
+    "short_circuit": {
+      "path": "assets/environment/short_circuit.png",
+      "size": [
+        80,
+        72
+      ],
+      "source": "Decoracion de fondos - electricidad.png",
+      "crop": [
+        696,
+        649,
+        796,
+        737
+      ],
+      "mode": "transparent"
+    },
+    "energy_fluctuation": {
+      "path": "assets/environment/energy_fluctuation.png",
+      "size": [
+        144,
+        72
+      ],
+      "source": "Decoracion de fondos - electricidad.png",
+      "crop": [
+        804,
+        649,
+        978,
+        737
+      ],
+      "mode": "transparent"
+    },
+    "tube_light": {
+      "path": "assets/environment/tube_light.png",
+      "size": [
+        96,
+        72
+      ],
+      "source": "Decoracion de fondos - electricidad.png",
+      "crop": [
+        991,
+        649,
+        1099,
+        737
+      ],
+      "mode": "transparent"
+    },
+    "core_light": {
+      "path": "assets/environment/core_light.png",
+      "size": [
+        96,
+        72
+      ],
+      "source": "Decoracion de fondos - electricidad.png",
+      "crop": [
+        1104,
+        649,
+        1222,
+        737
+      ],
+      "mode": "transparent"
+    },
+    "spark_light": {
+      "path": "assets/environment/spark_light.png",
+      "size": [
+        96,
+        72
+      ],
+      "source": "Decoracion de fondos - electricidad.png",
+      "crop": [
+        1226,
+        649,
+        1345,
+        737
+      ],
+      "mode": "transparent"
+    },
+    "ambient_light": {
+      "path": "assets/environment/ambient_light.png",
+      "size": [
+        144,
+        72
+      ],
+      "source": "Decoracion de fondos - electricidad.png",
+      "crop": [
+        1350,
+        649,
+        1514,
+        737
+      ],
+      "mode": "transparent"
+    },
+    "wear_scratches": {
+      "path": "assets/environment/wear_scratches.png",
+      "size": [
+        80,
+        80
+      ],
+      "source": "Decoracion de fondos - desgaste.png",
+      "crop": [
+        28,
+        433,
+        124,
+        527
+      ],
+      "mode": "transparent"
+    },
+    "wear_impacts": {
+      "path": "assets/environment/wear_impacts.png",
+      "size": [
+        80,
+        80
+      ],
+      "source": "Decoracion de fondos - desgaste.png",
+      "crop": [
+        245,
+        433,
+        340,
+        527
+      ],
+      "mode": "transparent"
+    },
+    "wear_rust": {
+      "path": "assets/environment/wear_rust.png",
+      "size": [
+        80,
+        80
+      ],
+      "source": "Decoracion de fondos - desgaste.png",
+      "crop": [
+        585,
+        433,
+        686,
+        527
+      ],
+      "mode": "transparent"
+    },
+    "wear_crack": {
+      "path": "assets/environment/wear_crack.png",
+      "size": [
+        80,
+        80
+      ],
+      "source": "Decoracion de fondos - desgaste.png",
+      "crop": [
+        1057,
+        433,
+        1160,
+        527
+      ],
+      "mode": "transparent"
+    },
+    "wear_oil": {
+      "path": "assets/environment/wear_oil.png",
+      "size": [
+        80,
+        80
+      ],
+      "source": "Decoracion de fondos - desgaste.png",
+      "crop": [
+        136,
+        614,
+        230,
+        706
+      ],
+      "mode": "transparent"
+    },
+    "wear_smoke": {
+      "path": "assets/environment/wear_smoke.png",
+      "size": [
+        80,
+        80
+      ],
+      "source": "Decoracion de fondos - desgaste.png",
+      "crop": [
+        238,
+        614,
+        333,
+        706
+      ],
+      "mode": "transparent"
+    },
+    "wear_electric_leak": {
+      "path": "assets/environment/wear_electric_leak.png",
+      "size": [
+        80,
+        80
+      ],
+      "source": "Decoracion de fondos - desgaste.png",
+      "crop": [
+        683,
+        613,
+        778,
+        707
+      ],
+      "mode": "transparent"
+    },
+    "wear_sparks": {
+      "path": "assets/environment/wear_sparks.png",
+      "size": [
+        64,
+        80
+      ],
+      "source": "Decoracion de fondos - desgaste.png",
+      "crop": [
+        789,
+        613,
+        852,
+        707
+      ],
+      "mode": "transparent"
+    },
+    "wear_vapor": {
+      "path": "assets/environment/wear_vapor.png",
+      "size": [
+        72,
+        80
+      ],
+      "source": "Decoracion de fondos - desgaste.png",
+      "crop": [
+        858,
+        613,
+        943,
+        707
+      ],
+      "mode": "transparent"
+    },
+    "wear_exposed_cables": {
+      "path": "assets/environment/wear_exposed_cables.png",
+      "size": [
+        96,
+        80
+      ],
+      "source": "Decoracion de fondos - desgaste.png",
+      "crop": [
+        1286,
+        613,
+        1396,
+        707
+      ],
+      "mode": "transparent"
+    },
+    "sign_energy": {
+      "path": "assets/environment/sign_energy.png",
+      "size": [
+        144,
+        88
+      ],
+      "source": "Decoracion de fondos - señalización.png",
+      "crop": [
+        38,
+        272,
+        194,
+        374
+      ],
+      "mode": "transparent"
+    },
+    "sign_sector": {
+      "path": "assets/environment/sign_sector.png",
+      "size": [
+        112,
+        96
+      ],
+      "source": "Decoracion de fondos - señalización.png",
+      "crop": [
+        214,
+        266,
+        339,
+        377
+      ],
+      "mode": "transparent"
+    },
+    "sign_direction": {
+      "path": "assets/environment/sign_direction.png",
+      "size": [
+        120,
+        80
+      ],
+      "source": "Decoracion de fondos - señalización.png",
+      "crop": [
+        363,
+        277,
+        495,
+        369
+      ],
+      "mode": "transparent"
+    },
+    "sign_warning": {
+      "path": "assets/environment/sign_warning.png",
+      "size": [
+        144,
+        88
+      ],
+      "source": "Decoracion de fondos - señalización.png",
+      "crop": [
+        513,
+        272,
+        674,
+        374
+      ],
+      "mode": "transparent"
+    },
+    "sign_maintenance": {
+      "path": "assets/environment/sign_maintenance.png",
+      "size": [
+        160,
+        88
+      ],
+      "source": "Decoracion de fondos - señalización.png",
+      "crop": [
+        696,
+        272,
+        878,
+        374
+      ],
+      "mode": "transparent"
+    },
+    "sign_exit": {
+      "path": "assets/environment/sign_exit.png",
+      "size": [
+        152,
+        88
+      ],
+      "source": "Decoracion de fondos - señalización.png",
+      "crop": [
+        899,
+        272,
+        1066,
+        374
+      ],
+      "mode": "transparent"
+    },
+    "arrow_right": {
+      "path": "assets/environment/arrow_right.png",
+      "size": [
+        64,
+        48
+      ],
+      "source": "Decoracion de fondos - señalización.png",
+      "crop": [
+        37,
+        463,
+        116,
+        520
+      ],
+      "mode": "transparent"
+    },
+    "arrow_left": {
+      "path": "assets/environment/arrow_left.png",
+      "size": [
+        64,
+        48
+      ],
+      "source": "Decoracion de fondos - señalización.png",
+      "crop": [
+        133,
+        463,
+        213,
+        520
+      ],
+      "mode": "transparent"
+    },
+    "arrow_double": {
+      "path": "assets/environment/arrow_double.png",
+      "size": [
+        64,
+        48
+      ],
+      "source": "Decoracion de fondos - señalización.png",
+      "crop": [
+        234,
+        463,
+        316,
+        520
+      ],
+      "mode": "transparent"
+    },
+    "arrow_up": {
+      "path": "assets/environment/arrow_up.png",
+      "size": [
+        64,
+        64
+      ],
+      "source": "Decoracion de fondos - señalización.png",
+      "crop": [
+        333,
+        453,
+        406,
+        526
+      ],
+      "mode": "transparent"
+    },
+    "floor_safe": {
+      "path": "assets/environment/floor_safe.png",
+      "size": [
+        96,
+        32
+      ],
+      "source": "Decoracion de fondos - señalización.png",
+      "crop": [
+        697,
+        484,
+        801,
+        520
+      ],
+      "mode": "transparent"
+    },
+    "floor_danger": {
+      "path": "assets/environment/floor_danger.png",
+      "size": [
+        96,
+        32
+      ],
+      "source": "Decoracion de fondos - señalización.png",
+      "crop": [
+        815,
+        484,
+        929,
+        520
+      ],
+      "mode": "transparent"
+    },
+    "symbol_electric": {
+      "path": "assets/environment/symbol_electric.png",
+      "size": [
+        72,
+        72
+      ],
+      "source": "Decoracion de fondos - señalización.png",
+      "crop": [
+        617,
+        610,
+        704,
+        704
+      ],
+      "mode": "transparent"
+    },
+    "symbol_no_entry": {
+      "path": "assets/environment/symbol_no_entry.png",
+      "size": [
+        72,
+        72
+      ],
+      "source": "Decoracion de fondos - señalización.png",
+      "crop": [
+        718,
+        610,
+        808,
+        704
+      ],
+      "mode": "transparent"
+    },
+    "symbol_authorized": {
+      "path": "assets/environment/symbol_authorized.png",
+      "size": [
+        72,
+        72
+      ],
+      "source": "Decoracion de fondos - señalización.png",
+      "crop": [
+        820,
+        610,
+        912,
+        704
+      ],
+      "mode": "transparent"
+    }
+  }
+}
