@@ -47,12 +47,17 @@ test('creates, lists and caps public rooms at four players', async () => {
     const joined = await owner.waitFor((message) => message.type === 'room_joined');
     assert.equal(joined.room.playerCount, 1);
     assert.equal(joined.room.maxPlayers, 4);
+    assert.equal(joined.playerName, 'M-0-Rojo');
 
+    const expectedNames = ['M-0-Verde', 'M-0-Azul', 'M-0-Amarillo'];
     for (let index = 1; index < 4; index++) {
       const client = await clientFor(server.port, `Jugador ${index + 1}`);
       clients.push(client);
       client.socket.send(JSON.stringify({ type: 'join_room', roomId: joined.room.id }));
-      await client.waitFor((message) => message.type === 'room_joined');
+      const playerJoined = await client.waitFor(
+        (message) => message.type === 'room_joined',
+      );
+      assert.equal(playerJoined.playerName, expectedNames[index - 1]);
     }
 
     clients[1].socket.send(JSON.stringify({
@@ -65,6 +70,7 @@ test('creates, lists and caps public rooms at four players', async () => {
     const state = await owner.waitFor((message) => message.type === 'player_state');
     assert.equal(state.x, 320);
     assert.equal(state.animation, 'run');
+    assert.equal(state.name, 'M-0-Verde');
 
     const fifth = await clientFor(server.port, 'Jugador 5');
     clients.push(fifth);

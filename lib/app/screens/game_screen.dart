@@ -79,7 +79,9 @@ class _GameScreenState extends State<GameScreen> {
                 left: 16,
                 child: Chip(
                   avatar: const Icon(Icons.groups, size: 18),
-                  label: Text(room.name),
+                  label: Text(
+                    '${widget.multiplayerClient?.localPlayerName ?? 'M-0'} · ${room.name}',
+                  ),
                 ),
               ),
           ],

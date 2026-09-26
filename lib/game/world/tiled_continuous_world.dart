@@ -423,6 +423,7 @@ class TiledContinuousWorld extends Component {
     _drawVolt(canvas, visible);
     _drawRemotePlayers(canvas);
     _drawPlayer(canvas);
+    _drawLocalPlayerName(canvas);
     _drawHud(canvas);
   }
 
@@ -883,6 +884,16 @@ class TiledContinuousWorld extends Component {
         Vector2(body.left - 8, body.top - 18),
       );
     }
+  }
+
+  void _drawLocalPlayerName(Canvas canvas) {
+    final name = multiplayerClient?.localPlayerName;
+    if (name == null) return;
+    _smallPaint.render(
+      canvas,
+      name,
+      Vector2(motor.body.left - 8, motor.body.top - 18),
+    );
   }
 
   String _playerAnimation() {

@@ -66,6 +66,7 @@ class MultiplayerClient extends ChangeNotifier {
   MultiplayerConnectionStatus status = MultiplayerConnectionStatus.disconnected;
   String? errorMessage;
   String? playerId;
+  String? localPlayerName;
   String? roomId;
   int spawnIndex = 0;
   List<MultiplayerRoom> rooms = const [];
@@ -123,6 +124,7 @@ class MultiplayerClient extends ChangeNotifier {
     if (roomId == null) return;
     _send({'type': 'leave_room'});
     roomId = null;
+    localPlayerName = null;
     remotePlayers.clear();
     notifyListeners();
   }
@@ -170,6 +172,7 @@ class MultiplayerClient extends ChangeNotifier {
           decoded['room'] as Map<String, Object?>,
         );
         roomId = room.id;
+        localPlayerName = decoded['playerName'] as String;
         spawnIndex = (decoded['spawnIndex'] as num?)?.toInt() ?? 0;
         remotePlayers.clear();
         for (final value in decoded['players'] as List<Object?>? ?? const []) {
@@ -229,6 +232,7 @@ class MultiplayerClient extends ChangeNotifier {
         ? 'Se perdió la conexión con el servidor.'
         : '$error';
     roomId = null;
+    localPlayerName = null;
     remotePlayers.clear();
     if (_welcomeCompleter case final completer? when !completer.isCompleted) {
       completer.completeError(StateError(errorMessage!));

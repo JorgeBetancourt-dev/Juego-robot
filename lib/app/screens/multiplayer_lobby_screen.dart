@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 import '../../domain/progression/game_progress.dart';
@@ -22,7 +20,7 @@ class _MultiplayerLobbyScreenState extends State<MultiplayerLobbyScreen> {
   void initState() {
     super.initState();
     _client = MultiplayerClient();
-    _playerName = 'M-0-${100 + Random().nextInt(900)}';
+    _playerName = 'M-0';
     _connect();
   }
 
@@ -128,7 +126,7 @@ class _MultiplayerLobbyScreenState extends State<MultiplayerLobbyScreen> {
   }
 
   Future<void> _createRoom() async {
-    final controller = TextEditingController(text: 'Sala de $_playerName');
+    final controller = TextEditingController(text: 'Sala pública');
     final name = await showDialog<String>(
       context: context,
       builder: (dialogContext) => AlertDialog(

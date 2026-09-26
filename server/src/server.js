@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { WebSocket, WebSocketServer } from 'ws';
 
 const MAX_PLAYERS = 4;
+const PLAYER_NAMES = ['M-0-Rojo', 'M-0-Verde', 'M-0-Azul', 'M-0-Amarillo'];
 const allowedAnimations = new Set([
   'idle',
   'run',
@@ -100,25 +101,36 @@ export function createMultiplayerServer({ port = Number(process.env.PORT || 8080
     }
     leaveRoom(client);
     client.roomId = room.id;
-    client.spawnIndex = room.nextSpawn++ % MAX_PLAYERS;
+    const occupiedSlots = new Set(
+      [...room.clients.values()].map((candidate) => candidate.spawnIndex),
+    );
+    client.spawnIndex = PLAYER_NAMES.findIndex(
+      (_, index) => !occupiedSlots.has(index),
+    );
+    client.displayName = PLAYER_NAMES[client.spawnIndex];
     room.clients.set(client.id, client);
     send(client, {
       type: 'room_joined',
       room: roomSummary(room),
       playerId: client.id,
+      playerName: client.displayName,
       spawnIndex: client.spawnIndex,
       players: [...room.clients.values()]
         .filter((candidate) => candidate.id !== client.id)
         .map((candidate) => ({
           id: candidate.id,
-          name: candidate.name,
+          name: candidate.displayName,
           spawnIndex: candidate.spawnIndex,
           state: candidate.state,
         })),
     });
     broadcast(room, {
       type: 'player_joined',
-      player: { id: client.id, name: client.name, spawnIndex: client.spawnIndex },
+      player: {
+        id: client.id,
+        name: client.displayName,
+        spawnIndex: client.spawnIndex,
+      },
     }, client.id);
     broadcastRoomList();
   }
@@ -146,7 +158,6 @@ export function createMultiplayerServer({ port = Number(process.env.PORT || 8080
           id: randomUUID().slice(0, 8),
           name: cleanText(message.name, `Sala de ${client.name}`, 32),
           clients: new Map(),
-          nextSpawn: 0,
         };
         rooms.set(room.id, room);
         joinRoom(client, room);
@@ -174,7 +185,7 @@ export function createMultiplayerServer({ port = Number(process.env.PORT || 8080
         broadcast(room, {
           type: 'player_state',
           playerId: client.id,
-          name: client.name,
+          name: client.displayName,
           ...client.state,
         }, client.id);
         break;
@@ -188,6 +199,7 @@ export function createMultiplayerServer({ port = Number(process.env.PORT || 8080
     const client = {
       id: randomUUID(),
       name: 'Jugador',
+      displayName: null,
       roomId: null,
       spawnIndex: 0,
       state: null,
