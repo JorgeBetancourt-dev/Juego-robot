@@ -61,6 +61,7 @@ class TiledContinuousWorld extends Component {
   EnvironmentAssets? _environment;
   GameSpriteAssets? _sprites;
   late final TextPaint _smallPaint;
+  late final TextPaint _playerNamePaint;
   double _elapsed = 0;
   double _deathTimer = 0;
   double _cameraX = 0;
@@ -117,6 +118,21 @@ class TiledContinuousWorld extends Component {
         fontSize: 14,
         fontFamily: 'monospace',
         shadows: [flutter.Shadow(color: Color(0xFF071017), blurRadius: 3)],
+      ),
+    );
+    _playerNamePaint = TextPaint(
+      style: const flutter.TextStyle(
+        color: Color(0xFFFF3B30),
+        fontSize: 15,
+        fontFamily: 'monospace',
+        fontWeight: flutter.FontWeight.w700,
+        shadows: [
+          flutter.Shadow(
+            color: Color(0xFF071017),
+            blurRadius: 4,
+            offset: Offset(1, 1),
+          ),
+        ],
       ),
     );
     _environment = await EnvironmentAssets.load();
@@ -883,10 +899,10 @@ class TiledContinuousWorld extends Component {
           elapsed: _elapsed,
         );
       }
-      _smallPaint.render(
+      _playerNamePaint.render(
         canvas,
         remote.name,
-        Vector2(body.left - 8, body.top - 18),
+        Vector2(body.left - 8, body.top - 70),
       );
     }
   }
@@ -894,10 +910,10 @@ class TiledContinuousWorld extends Component {
   void _drawLocalPlayerName(Canvas canvas) {
     final name = multiplayerClient?.localPlayerName;
     if (name == null) return;
-    _smallPaint.render(
+    _playerNamePaint.render(
       canvas,
       name,
-      Vector2(motor.body.left - 8, motor.body.top - 18),
+      Vector2(motor.body.left - 8, motor.body.top - 70),
     );
   }
 
