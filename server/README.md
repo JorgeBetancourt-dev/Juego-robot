@@ -14,6 +14,12 @@ npm start
 El servicio HTTP escucha en `PORT` (8080 por defecto) y el WebSocket en `/ws`.
 Las salas viven en memoria y se eliminan cuando sale el último jugador.
 
+Prueba contra un despliegue público:
+
+```powershell
+node tools/remote-smoke.mjs wss://NOMBRE.onrender.com/ws
+```
+
 ## Render
 
 El `render.yaml` de la raíz configura un Web Service gratuito. Después de
