@@ -62,7 +62,19 @@ try {
   if (state.x !== 320 || state.animation !== 'run' || state.name !== 'M-0-Verde') {
     throw new Error('El estado recibido no coincide.');
   }
-  console.log(`OK: sala ${joined.room.id}, M-0-Rojo y M-0-Verde sincronizados.`);
+  first.socket.send(JSON.stringify({ type: 'arena_ready' }));
+  const horde = await first.waitFor(
+    (message) => message.type === 'horde_state' && message.phase === 'active',
+  );
+  if (horde.horde !== 1 || horde.enemies.length !== 4) {
+    throw new Error('La primera horda no coincide con dos jugadores.');
+  }
+  if (horde.enemies.some((enemy) => enemy.type === 'volt')) {
+    throw new Error('VOLT apareció antes de la horda final.');
+  }
+  console.log(
+    `OK: sala ${joined.room.id}, dos jugadores y ${horde.enemies.length} enemigos sincronizados.`,
+  );
 } finally {
   first.socket.close();
   second.socket.close();
