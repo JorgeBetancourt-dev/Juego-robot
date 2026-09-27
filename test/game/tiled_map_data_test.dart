@@ -92,6 +92,26 @@ void main() {
     }
   });
 
+  test('un VOLT de horda usa su posición y vida sincronizadas', () {
+    final volt = TiledEnemyActor(
+      id: 'volt_horda',
+      type: TiledEnemyType.volt,
+      markerX: 0,
+      markerY: 0,
+      spawnX: 480,
+      spawnY: 708,
+      maxHealth: 12,
+    );
+
+    expect(volt.body.left, 480);
+    expect(volt.body.top, 708);
+    expect(volt.body.width, 152);
+    expect(volt.body.height, 220);
+    expect(volt.health, 12);
+    volt.setNetworkHealth(0);
+    expect(volt.alive, isFalse);
+  });
+
   test('Volt solo activa el encuentro dentro de su sala', () {
     final marker = map.enemyMarkers.singleWhere(
       (candidate) => candidate.type == TiledEnemyType.volt,

@@ -30,7 +30,10 @@ class TiledEnemyActor {
     required this.type,
     required this.markerX,
     required this.markerY,
-  }) {
+    this.spawnX,
+    this.spawnY,
+    this.maxHealth = 3,
+  }) : health = maxHealth {
     _resetPosition();
   }
 
@@ -38,6 +41,9 @@ class TiledEnemyActor {
   final TiledEnemyType type;
   final double markerX;
   final double markerY;
+  final double? spawnX;
+  final double? spawnY;
+  final int maxHealth;
   final List<TiledEnemyProjectile> projectiles = [];
 
   late double x;
@@ -49,7 +55,7 @@ class TiledEnemyActor {
   double hurtTimer = 0;
   double _shootCooldown = 0.7;
   int direction = -1;
-  int health = 3;
+  int health;
   bool grounded = false;
 
   double get width => switch (type) {
@@ -132,7 +138,13 @@ class TiledEnemyActor {
         _updateDrone(dt, solids, oneWayPlatforms);
         _tryShoot(dt, player, interval: 2.1, range: 680);
       case TiledEnemyType.volt:
-        break;
+        if ((playerCenter - center).abs() < 92) {
+          velocityX = 0;
+          attackTimer = 0.3;
+        } else {
+          velocityX = 54 * direction.toDouble();
+        }
+        _moveGrounded(dt, solids, oneWayPlatforms, patrolEdges: true);
     }
   }
 
@@ -236,8 +248,17 @@ class TiledEnemyActor {
     direction *= -1;
   }
 
+  void setNetworkHealth(int value) {
+    final next = value.clamp(0, maxHealth);
+    if (next < health) {
+      elapsed = 0;
+      hurtTimer = 0.24;
+    }
+    health = next;
+  }
+
   void reset() {
-    health = 3;
+    health = maxHealth;
     direction = -1;
     velocityX = 0;
     velocityY = 0;
@@ -250,8 +271,8 @@ class TiledEnemyActor {
   }
 
   void _resetPosition() {
-    x = markerX + (markerImageWidth - width) / 2;
-    y = markerY + 32 - height;
+    x = spawnX ?? markerX + (markerImageWidth - width) / 2;
+    y = spawnY ?? markerY + 32 - height;
   }
 }
 

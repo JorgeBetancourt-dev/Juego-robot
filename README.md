@@ -76,5 +76,7 @@ Completado en la base actual:
 - Valores iniciales de física centralizados y placeholders dibujados por código.
 - Navegador de salas públicas, creación y entrada a partidas de hasta cuatro
   jugadores, con posiciones y animaciones sincronizadas por WebSocket.
+- Modo cooperativo de cinco hordas escaladas según los jugadores conectados,
+  descansos sincronizados de 10 segundos y una horda final compuesta por VOLT.
 
 Siguientes fases: selector y panel de debug, opciones de controles, pruebas de widgets e integración y ajuste en dispositivo físico.

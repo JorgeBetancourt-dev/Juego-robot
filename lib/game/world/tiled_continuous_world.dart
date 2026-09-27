@@ -57,6 +57,7 @@ class TiledContinuousWorld extends Component {
   String? _activeCheckpointId;
   final List<TiledEnemyActor> _enemies = [];
   final Map<String, Vec2d> _remotePositions = {};
+  final Set<String> _downStrikeHitIds = {};
   TiledVoltActor? _volt;
   EnvironmentAssets? _environment;
   GameSpriteAssets? _sprites;
@@ -138,6 +139,7 @@ class TiledContinuousWorld extends Component {
     _environment = await EnvironmentAssets.load();
     _sprites = await GameSpriteAssets.load();
     if (!multiplayer) _loadEnemyMarkers();
+    if (multiplayer) multiplayerClient?.markArenaReady();
     _cameraX = motor.body.left + motor.body.width / 2;
     _cameraY = motor.body.top + motor.body.height / 2 - cameraVerticalOffset;
     _publishCamera();
@@ -223,6 +225,7 @@ class TiledContinuousWorld extends Component {
   void _updateMultiplayer(double dt) {
     final client = multiplayerClient;
     if (client == null) return;
+    _syncHordeEnemies(client);
     client.sendPlayerState(
       x: motor.body.left,
       y: motor.body.top,
@@ -240,6 +243,36 @@ class TiledContinuousWorld extends Component {
         current.x + (target.x - current.x) * blend,
         current.y + (target.y - current.y) * blend,
       );
+    }
+  }
+
+  void _syncHordeEnemies(MultiplayerClient client) {
+    final snapshots = client.hordeEnemies;
+    _enemies.removeWhere((enemy) => !snapshots.containsKey(enemy.id));
+    for (final snapshot in snapshots.values) {
+      TiledEnemyActor? actor;
+      for (final candidate in _enemies) {
+        if (candidate.id == snapshot.id) {
+          actor = candidate;
+          break;
+        }
+      }
+      actor ??= TiledEnemyActor(
+        id: snapshot.id,
+        type: switch (snapshot.type) {
+          'watcher' => TiledEnemyType.watcher,
+          'drone' => TiledEnemyType.drone,
+          'volt' => TiledEnemyType.volt,
+          _ => TiledEnemyType.patrol,
+        },
+        markerX: 0,
+        markerY: 0,
+        spawnX: snapshot.x,
+        spawnY: snapshot.y,
+        maxHealth: snapshot.type == 'volt' ? 12 : 3,
+      );
+      if (!_enemies.contains(actor)) _enemies.add(actor);
+      actor.setNetworkHealth(snapshot.health);
     }
   }
 
@@ -264,7 +297,12 @@ class TiledContinuousWorld extends Component {
 
   void _updateEnemies(double dt) {
     for (final enemy in _enemies) {
-      enemy.update(dt, motor.body, map.solids, map.oneWayPlatforms);
+      enemy.update(
+        dt,
+        multiplayer ? _closestPlayerTo(enemy.body) : motor.body,
+        map.solids,
+        map.oneWayPlatforms,
+      );
     }
     final volt = _volt;
     if (volt == null || session.progress.bossesDefeated.contains('volt')) {
@@ -280,6 +318,24 @@ class TiledContinuousWorld extends Component {
       _voltArena,
     );
     _setBossEncounter(encounter && !volt.controller.defeated);
+  }
+
+  Aabb _closestPlayerTo(Aabb enemyBody) {
+    final players = <Aabb>[motor.body];
+    for (final position in _remotePositions.values) {
+      players.add(
+        Aabb(position.x, position.y, config.playerWidth, config.playerHeight),
+      );
+    }
+    final enemyCenter = enemyBody.left + enemyBody.width / 2;
+    players.sort((first, second) {
+      final firstDistance = ((first.left + first.width / 2) - enemyCenter)
+          .abs();
+      final secondDistance = ((second.left + second.width / 2) - enemyCenter)
+          .abs();
+      return firstDistance.compareTo(secondDistance);
+    });
+    return players.first;
   }
 
   // Sala cerrada dibujada entre las celdas 270..308 y 181..194 del TMX.
@@ -302,17 +358,21 @@ class TiledContinuousWorld extends Component {
     final playerAttack = combat.phase == AttackPhase.active
         ? combat.attackHitbox(playerBody, motor.facing)
         : null;
+    if (motor.state != PlayerMotionState.downStriking) {
+      _downStrikeHitIds.clear();
+    }
     for (final enemy in _enemies) {
       if (enemy.alive &&
           playerAttack != null &&
           playerAttack.overlaps(enemy.body) &&
           combat.tryHit(enemy.id)) {
-        enemy.receiveDamage();
+        _damageEnemy(enemy);
       }
       if (enemy.alive &&
           motor.state == PlayerMotionState.downStriking &&
-          playerBody.overlaps(enemy.body)) {
-        enemy.receiveDamage();
+          playerBody.overlaps(enemy.body) &&
+          _downStrikeHitIds.add(enemy.id)) {
+        _damageEnemy(enemy);
         motor.bounceFromDownStrike();
       }
       if (enemy.alive && enemy.body.overlaps(playerBody)) {
@@ -331,6 +391,14 @@ class TiledContinuousWorld extends Component {
       }
     }
     _resolveVoltCombat(playerAttack);
+  }
+
+  void _damageEnemy(TiledEnemyActor enemy) {
+    if (multiplayer) {
+      multiplayerClient?.hitEnemy(enemy.id);
+    } else {
+      enemy.receiveDamage();
+    }
   }
 
   void _resolveVoltCombat(Aabb? playerAttack) {
@@ -649,7 +717,8 @@ class TiledContinuousWorld extends Component {
             TiledEnemyType.patrol => sprites.patrol[enemy.animation]!,
             TiledEnemyType.watcher => sprites.watcher[enemy.animation]!,
             TiledEnemyType.drone => sprites.drone[enemy.animation]!,
-            TiledEnemyType.volt => sprites.volt['idle']!,
+            TiledEnemyType.volt =>
+              sprites.volt[enemy.alive ? 'walk' : 'defeat']!,
           };
           final destination = switch (enemy.type) {
             TiledEnemyType.patrol => Rect.fromLTWH(
@@ -670,7 +739,12 @@ class TiledContinuousWorld extends Component {
               112,
               76,
             ),
-            TiledEnemyType.volt => Rect.zero,
+            TiledEnemyType.volt => Rect.fromLTWH(
+              enemy.body.left - 20,
+              enemy.body.bottom - 256,
+              192,
+              256,
+            ),
           };
           _drawSequence(
             canvas,

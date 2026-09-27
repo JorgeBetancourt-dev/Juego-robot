@@ -6,6 +6,8 @@ import 'package:flutter/foundation.dart';
 
 enum MultiplayerConnectionStatus { disconnected, connecting, connected, error }
 
+enum MultiplayerHordePhase { waiting, active, intermission, victory }
+
 class MultiplayerRoom {
   const MultiplayerRoom({
     required this.id,
@@ -46,6 +48,31 @@ class RemotePlayerSnapshot {
   final String animation;
 }
 
+class MultiplayerEnemySnapshot {
+  const MultiplayerEnemySnapshot({
+    required this.id,
+    required this.type,
+    required this.x,
+    required this.y,
+    required this.health,
+  });
+
+  factory MultiplayerEnemySnapshot.fromJson(Map<String, Object?> json) =>
+      MultiplayerEnemySnapshot(
+        id: json['id'] as String,
+        type: json['type'] as String,
+        x: (json['x'] as num).toDouble(),
+        y: (json['y'] as num).toDouble(),
+        health: (json['health'] as num).toInt(),
+      );
+
+  final String id;
+  final String type;
+  final double x;
+  final double y;
+  final int health;
+}
+
 class MultiplayerClient extends ChangeNotifier {
   MultiplayerClient({String? endpoint})
     : endpoint =
@@ -69,8 +96,13 @@ class MultiplayerClient extends ChangeNotifier {
   String? localPlayerName;
   String? roomId;
   int spawnIndex = 0;
+  int hordeNumber = 0;
+  int totalHordes = 5;
+  MultiplayerHordePhase hordePhase = MultiplayerHordePhase.waiting;
+  DateTime? intermissionEndsAt;
   List<MultiplayerRoom> rooms = const [];
   final Map<String, RemotePlayerSnapshot> remotePlayers = {};
+  final Map<String, MultiplayerEnemySnapshot> hordeEnemies = {};
 
   bool get isConnected => status == MultiplayerConnectionStatus.connected;
 
@@ -126,8 +158,14 @@ class MultiplayerClient extends ChangeNotifier {
     roomId = null;
     localPlayerName = null;
     remotePlayers.clear();
+    _clearHorde();
     notifyListeners();
   }
+
+  void markArenaReady() => _send({'type': 'arena_ready'});
+
+  void hitEnemy(String enemyId) =>
+      _send({'type': 'enemy_hit', 'enemyId': enemyId});
 
   void sendPlayerState({
     required double x,
@@ -183,6 +221,8 @@ class MultiplayerClient extends ChangeNotifier {
             remotePlayers[id] = _snapshot(id, value['name'] as String, state);
           }
         }
+        final horde = decoded['horde'];
+        if (horde is Map<String, Object?>) _readHordeState(horde);
         _joinCompleter?.complete(room);
         break;
       case 'player_state':
@@ -193,6 +233,9 @@ class MultiplayerClient extends ChangeNotifier {
         break;
       case 'player_left':
         remotePlayers.remove(decoded['playerId']);
+        break;
+      case 'horde_state':
+        _readHordeState(decoded);
         break;
       case 'error':
         final message = decoded['message'] as String? ?? 'Error de red.';
@@ -218,6 +261,38 @@ class MultiplayerClient extends ChangeNotifier {
     animation: json['animation'] as String? ?? 'idle',
   );
 
+  void _readHordeState(Map<String, Object?> json) {
+    hordeNumber = (json['horde'] as num?)?.toInt() ?? 0;
+    totalHordes = (json['totalHordes'] as num?)?.toInt() ?? 5;
+    hordePhase = switch (json['phase']) {
+      'active' => MultiplayerHordePhase.active,
+      'intermission' => MultiplayerHordePhase.intermission,
+      'victory' => MultiplayerHordePhase.victory,
+      _ => MultiplayerHordePhase.waiting,
+    };
+    final remaining = json['intermissionRemainingMs'];
+    final endsAt = json['intermissionEndsAt'];
+    intermissionEndsAt = remaining is num
+        ? DateTime.now().add(Duration(milliseconds: remaining.toInt()))
+        : endsAt is num
+        ? DateTime.fromMillisecondsSinceEpoch(endsAt.toInt())
+        : null;
+    hordeEnemies.clear();
+    for (final value in json['enemies'] as List<Object?>? ?? const []) {
+      if (value is! Map<String, Object?>) continue;
+      final enemy = MultiplayerEnemySnapshot.fromJson(value);
+      hordeEnemies[enemy.id] = enemy;
+    }
+  }
+
+  void _clearHorde() {
+    hordeNumber = 0;
+    totalHordes = 5;
+    hordePhase = MultiplayerHordePhase.waiting;
+    intermissionEndsAt = null;
+    hordeEnemies.clear();
+  }
+
   void _send(Map<String, Object> message) {
     final socket = _socket;
     if (socket?.readyState == WebSocket.open) socket!.add(jsonEncode(message));
@@ -234,6 +309,7 @@ class MultiplayerClient extends ChangeNotifier {
     roomId = null;
     localPlayerName = null;
     remotePlayers.clear();
+    _clearHorde();
     if (_welcomeCompleter case final completer? when !completer.isCompleted) {
       completer.completeError(StateError(errorMessage!));
     }

@@ -4,6 +4,8 @@ import { fileURLToPath } from 'node:url';
 import { WebSocket, WebSocketServer } from 'ws';
 
 const MAX_PLAYERS = 4;
+const TOTAL_HORDES = 5;
+const NORMAL_ENEMY_TYPES = ['patrol', 'watcher', 'drone'];
 const PLAYER_NAMES = ['M-0-Rojo', 'M-0-Verde', 'M-0-Azul', 'M-0-Amarillo'];
 const allowedAnimations = new Set([
   'idle',
@@ -43,7 +45,22 @@ function roomSummary(room) {
   };
 }
 
-export function createMultiplayerServer({ port = Number(process.env.PORT || 8080) } = {}) {
+export function enemyCountForHorde(horde, playerCount) {
+  if (horde < 1 || horde > TOTAL_HORDES || playerCount < 1) return 0;
+  return horde === TOTAL_HORDES ? playerCount : playerCount * (horde + 1);
+}
+
+export function enemyTypeForHorde(horde, random = Math.random) {
+  if (horde === TOTAL_HORDES) return 'volt';
+  return NORMAL_ENEMY_TYPES[Math.floor(random() * NORMAL_ENEMY_TYPES.length)];
+}
+
+export function createMultiplayerServer({
+  port = Number(process.env.PORT || 8080),
+  intermissionMs = 10000,
+  hitCooldownMs = 220,
+  random = Math.random,
+} = {}) {
   const clients = new Map();
   const rooms = new Map();
 
@@ -82,15 +99,88 @@ export function createMultiplayerServer({ port = Number(process.env.PORT || 8080
     }
   }
 
+  function hordeState(room) {
+    return {
+      type: 'horde_state',
+      phase: room.hordePhase,
+      horde: room.horde,
+      totalHordes: TOTAL_HORDES,
+      intermissionEndsAt: room.intermissionEndsAt,
+      intermissionRemainingMs: room.intermissionEndsAt == null
+        ? null
+        : Math.max(0, room.intermissionEndsAt - Date.now()),
+      enemies: [...room.enemies.values()].map((enemy) => ({ ...enemy })),
+    };
+  }
+
+  function broadcastHordeState(room) {
+    broadcast(room, hordeState(room));
+  }
+
+  function startHorde(room, horde) {
+    if (room.clients.size === 0) return;
+    if (room.hordeTimer) clearTimeout(room.hordeTimer);
+    room.hordeTimer = null;
+    room.horde = horde;
+    room.hordePhase = 'active';
+    room.intermissionEndsAt = null;
+    room.enemies.clear();
+    const count = enemyCountForHorde(horde, room.clients.size);
+    for (let index = 0; index < count; index++) {
+      const type = enemyTypeForHorde(horde, random);
+      const rightmostX = type === 'volt' ? 1048 : 1200;
+      const spacing = (rightmostX - 80) / Math.max(1, count - 1);
+      const x = count === 1 ? 564 : 80 + spacing * index;
+      const height = type === 'volt'
+        ? 220
+        : type === 'watcher'
+          ? 60
+          : type === 'patrol'
+            ? 38
+            : 32;
+      const enemy = {
+        id: `${horde}-${index}-${randomUUID().slice(0, 6)}`,
+        type,
+        x: Math.round(x),
+        y: 928 - height,
+        health: type === 'volt' ? 12 : 3,
+      };
+      room.enemies.set(enemy.id, enemy);
+    }
+    broadcastHordeState(room);
+  }
+
+  function finishHorde(room) {
+    if (room.horde >= TOTAL_HORDES) {
+      room.hordePhase = 'victory';
+      room.intermissionEndsAt = null;
+      broadcastHordeState(room);
+      return;
+    }
+    room.hordePhase = 'intermission';
+    room.intermissionEndsAt = Date.now() + intermissionMs;
+    broadcastHordeState(room);
+    room.hordeTimer = setTimeout(() => {
+      room.hordeTimer = null;
+      if (rooms.has(room.id) && room.clients.size > 0) {
+        startHorde(room, room.horde + 1);
+      }
+    }, intermissionMs);
+  }
+
   function leaveRoom(client) {
     if (!client.roomId) return;
     const room = rooms.get(client.roomId);
     client.roomId = null;
     client.state = null;
     if (!room) return;
+    room.readyPlayers.delete(client.id);
     room.clients.delete(client.id);
     broadcast(room, { type: 'player_left', playerId: client.id });
-    if (room.clients.size === 0) rooms.delete(room.id);
+    if (room.clients.size === 0) {
+      if (room.hordeTimer) clearTimeout(room.hordeTimer);
+      rooms.delete(room.id);
+    }
     broadcastRoomList();
   }
 
@@ -123,6 +213,7 @@ export function createMultiplayerServer({ port = Number(process.env.PORT || 8080
           spawnIndex: candidate.spawnIndex,
           state: candidate.state,
         })),
+      horde: hordeState(room),
     });
     broadcast(room, {
       type: 'player_joined',
@@ -158,6 +249,12 @@ export function createMultiplayerServer({ port = Number(process.env.PORT || 8080
           id: randomUUID().slice(0, 8),
           name: cleanText(message.name, `Sala de ${client.name}`, 32),
           clients: new Map(),
+          readyPlayers: new Set(),
+          enemies: new Map(),
+          horde: 0,
+          hordePhase: 'waiting',
+          intermissionEndsAt: null,
+          hordeTimer: null,
         };
         rooms.set(room.id, room);
         joinRoom(client, room);
@@ -170,6 +267,33 @@ export function createMultiplayerServer({ port = Number(process.env.PORT || 8080
         leaveRoom(client);
         send(client, { type: 'room_left' });
         break;
+      case 'arena_ready': {
+        const room = rooms.get(client.roomId);
+        if (!room) return;
+        room.readyPlayers.add(client.id);
+        if (room.hordePhase === 'waiting' && room.horde === 0) {
+          startHorde(room, 1);
+        } else {
+          send(client, hordeState(room));
+        }
+        break;
+      }
+      case 'enemy_hit': {
+        const room = rooms.get(client.roomId);
+        if (!room || room.hordePhase !== 'active') return;
+        const enemy = room.enemies.get(String(message.enemyId || ''));
+        if (!enemy || enemy.health <= 0) return;
+        const now = Date.now();
+        const previousHit = client.enemyHits.get(enemy.id) || 0;
+        if (now - previousHit < hitCooldownMs) return;
+        client.enemyHits.set(enemy.id, now);
+        enemy.health = Math.max(0, enemy.health - 1);
+        broadcastHordeState(room);
+        if ([...room.enemies.values()].every((candidate) => candidate.health <= 0)) {
+          finishHorde(room);
+        }
+        break;
+      }
       case 'player_state': {
         const room = rooms.get(client.roomId);
         if (!room) return;
@@ -203,6 +327,7 @@ export function createMultiplayerServer({ port = Number(process.env.PORT || 8080
       roomId: null,
       spawnIndex: 0,
       state: null,
+      enemyHits: new Map(),
       alive: true,
       ws,
     };
@@ -236,6 +361,9 @@ export function createMultiplayerServer({ port = Number(process.env.PORT || 8080
         clients,
         close: () => new Promise((done) => {
           clearInterval(heartbeat);
+          for (const room of rooms.values()) {
+            if (room.hordeTimer) clearTimeout(room.hordeTimer);
+          }
           for (const client of clients.values()) client.ws.close();
           websocketServer.close(() => httpServer.close(done));
         }),

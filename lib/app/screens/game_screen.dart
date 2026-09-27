@@ -34,6 +34,7 @@ class GameScreen extends StatefulWidget {
 class _GameScreenState extends State<GameScreen> {
   late final InputController _input;
   late final NexusGame _game;
+  Timer? _hudClock;
 
   @override
   void initState() {
@@ -48,6 +49,11 @@ class _GameScreenState extends State<GameScreen> {
       multiplayerClient: widget.multiplayerClient,
       requestPause: _showPause,
     );
+    if (widget.multiplayer) {
+      _hudClock = Timer.periodic(const Duration(milliseconds: 250), (_) {
+        if (mounted) setState(() {});
+      });
+    }
   }
 
   @override
@@ -73,15 +79,79 @@ class _GameScreenState extends State<GameScreen> {
                 icon: const Icon(Icons.pause),
               ),
             ),
-            if (widget.multiplayerRoom case final room?)
+            if (widget.multiplayerRoom case final room?) ...[
               Positioned(
                 top: 64,
                 right: 16,
-                child: Chip(
-                  avatar: const Icon(Icons.groups, size: 18),
-                  label: Text(room.name),
+                child: AnimatedBuilder(
+                  animation: widget.multiplayerClient!,
+                  builder: (context, _) => Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Chip(
+                        avatar: const Icon(Icons.groups, size: 18),
+                        label: Text(room.name),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 5,
+                        ),
+                        decoration: BoxDecoration(
+                          color: const Color(0xCC101A22),
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                        child: Text(
+                          'HORDA ${_displayHorde()}/${widget.multiplayerClient!.totalHordes}',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
+              if (widget.multiplayerClient?.hordePhase ==
+                  MultiplayerHordePhase.intermission)
+                Positioned(
+                  top: 12,
+                  left: 72,
+                  right: 72,
+                  child: Center(
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Chip(
+                        avatar: const Icon(Icons.timer_outlined, size: 19),
+                        label: Text(
+                          'SIGUIENTE HORDA EN ${_remainingIntermissionSeconds()} s',
+                          style: const TextStyle(fontWeight: FontWeight.w800),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              if (widget.multiplayerClient?.hordePhase ==
+                  MultiplayerHordePhase.victory)
+                const Positioned(
+                  top: 12,
+                  left: 72,
+                  right: 72,
+                  child: Center(
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Chip(
+                        avatar: Icon(Icons.emoji_events, size: 19),
+                        label: Text(
+                          '¡TODAS LAS HORDAS SUPERADAS!',
+                          style: TextStyle(fontWeight: FontWeight.w800),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+            ],
           ],
         ),
       ),
@@ -90,9 +160,27 @@ class _GameScreenState extends State<GameScreen> {
 
   @override
   void dispose() {
+    _hudClock?.cancel();
     _input.releaseAll();
     unawaited(_game.disposeMusic());
     super.dispose();
+  }
+
+  int _displayHorde() {
+    final client = widget.multiplayerClient;
+    if (client == null) return 1;
+    if (client.hordePhase == MultiplayerHordePhase.intermission) {
+      return (client.hordeNumber + 1).clamp(1, client.totalHordes);
+    }
+    return client.hordeNumber.clamp(1, client.totalHordes);
+  }
+
+  int _remainingIntermissionSeconds() {
+    final endsAt = widget.multiplayerClient?.intermissionEndsAt;
+    if (endsAt == null) return 0;
+    final milliseconds = endsAt.difference(DateTime.now()).inMilliseconds;
+    if (milliseconds <= 0) return 0;
+    return (milliseconds / 1000).ceil();
   }
 
   Future<void> _showPause() async {

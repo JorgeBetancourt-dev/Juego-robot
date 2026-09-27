@@ -2,7 +2,11 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import WebSocket from 'ws';
 
-import { createMultiplayerServer } from '../src/server.js';
+import {
+  createMultiplayerServer,
+  enemyCountForHorde,
+  enemyTypeForHorde,
+} from '../src/server.js';
 
 function clientFor(port, name) {
   return new Promise((resolve, reject) => {
@@ -72,6 +76,14 @@ test('creates, lists and caps public rooms at four players', async () => {
     assert.equal(state.animation, 'run');
     assert.equal(state.name, 'M-0-Verde');
 
+    owner.socket.send(JSON.stringify({ type: 'arena_ready' }));
+    const firstHorde = await owner.waitFor(
+      (message) => message.type === 'horde_state' && message.phase === 'active',
+    );
+    assert.equal(firstHorde.horde, 1);
+    assert.equal(firstHorde.enemies.length, 8);
+    assert.equal(firstHorde.enemies.some((enemy) => enemy.type === 'volt'), false);
+
     const fifth = await clientFor(server.port, 'Jugador 5');
     clients.push(fifth);
     fifth.socket.send(JSON.stringify({ type: 'join_room', roomId: joined.room.id }));
@@ -79,6 +91,64 @@ test('creates, lists and caps public rooms at four players', async () => {
     assert.equal(error.message, 'La sala está llena.');
   } finally {
     for (const client of clients) client.socket.close();
+    await server.close();
+  }
+});
+
+test('scales five hordes and reserves VOLT for the last one', () => {
+  assert.deepEqual(
+    [1, 2, 3, 4].map((players) => [
+      enemyCountForHorde(1, players),
+      enemyCountForHorde(2, players),
+      enemyCountForHorde(3, players),
+      enemyCountForHorde(4, players),
+      enemyCountForHorde(5, players),
+    ]),
+    [
+      [2, 3, 4, 5, 1],
+      [4, 6, 8, 10, 2],
+      [6, 9, 12, 15, 3],
+      [8, 12, 16, 20, 4],
+    ],
+  );
+  assert.notEqual(enemyTypeForHorde(1, () => 0), 'volt');
+  assert.notEqual(enemyTypeForHorde(4, () => 0.99), 'volt');
+  assert.equal(enemyTypeForHorde(5, () => 0), 'volt');
+});
+
+test('waits between hordes and advances when every enemy is defeated', async () => {
+  const server = await createMultiplayerServer({
+    port: 0,
+    intermissionMs: 30,
+    hitCooldownMs: 0,
+    random: () => 0,
+  });
+  const client = await clientFor(server.port, 'M-0');
+  try {
+    client.socket.send(JSON.stringify({ type: 'create_room', name: 'Hordas' }));
+    await client.waitFor((message) => message.type === 'room_joined');
+    client.socket.send(JSON.stringify({ type: 'arena_ready' }));
+    const first = await client.waitFor(
+      (message) => message.type === 'horde_state' && message.horde === 1,
+    );
+    assert.equal(first.enemies.length, 2);
+    for (const enemy of first.enemies) {
+      for (let hit = 0; hit < enemy.health; hit++) {
+        client.socket.send(JSON.stringify({ type: 'enemy_hit', enemyId: enemy.id }));
+      }
+    }
+    const rest = await client.waitFor(
+      (message) => message.type === 'horde_state' && message.phase === 'intermission',
+    );
+    assert.equal(rest.horde, 1);
+    assert.ok(rest.intermissionEndsAt > Date.now());
+    const second = await client.waitFor(
+      (message) => message.type === 'horde_state' && message.horde === 2,
+    );
+    assert.equal(second.phase, 'active');
+    assert.equal(second.enemies.length, 3);
+  } finally {
+    client.socket.close();
     await server.close();
   }
 });

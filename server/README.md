@@ -14,6 +14,11 @@ npm start
 El servicio HTTP escucha en `PORT` (8080 por defecto) y el WebSocket en `/ws`.
 Las salas viven en memoria y se eliminan cuando sale el último jugador.
 
+Cada sala ejecuta cinco hordas cooperativas. Las primeras cuatro generan
+`jugadores × 2`, `× 3`, `× 4` y `× 5` enemigos aleatorios sin VOLT. La quinta
+genera un VOLT por jugador. El servidor conserva la vida compartida de los
+enemigos y espera 10 segundos entre hordas.
+
 Prueba contra un despliegue público:
 
 ```powershell
