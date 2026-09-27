@@ -123,10 +123,26 @@ class TiledMapData {
     final platform = pair[safeIndex % 2];
     final secondPosition = safeIndex >= 2;
     const horizontalPadding = 28.0;
-    final x = secondPosition
+    final preferredX = secondPosition
         ? platform.right - playerWidth - horizontalPadding
         : platform.left + horizontalPadding;
-    return Vec2d(x, platform.top - playerHeight);
+    final y = platform.top - playerHeight;
+    final minX = platform.left;
+    final maxX = platform.right - playerWidth;
+    final maxOffset = (platform.width + horizontalPadding).ceil();
+    for (var offset = 0; offset <= maxOffset; offset++) {
+      final candidates = offset == 0
+          ? <double>[preferredX]
+          : <double>[preferredX - offset, preferredX + offset];
+      for (final candidate in candidates) {
+        final x = candidate.clamp(minX, maxX).toDouble();
+        final body = Aabb(x, y, playerWidth, playerHeight);
+        if (!solids.any(body.overlaps) && !hazards.any(body.overlaps)) {
+          return Vec2d(x, y);
+        }
+      }
+    }
+    return Vec2d(preferredX.clamp(minX, maxX).toDouble(), y);
   }
 
   static Future<TiledMapData> load({

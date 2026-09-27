@@ -214,11 +214,11 @@ void main() {
     expect(multiplayerMap.profile, TiledMapProfile.multiplayer);
     expect(multiplayerMap.mapWidth, 40);
     expect(multiplayerMap.mapHeight, 40);
-    expect(multiplayerMap.layers, hasLength(2));
-    expect(multiplayerMap.layers.expand((layer) => layer), hasLength(868));
+    expect(multiplayerMap.layers, hasLength(3));
+    expect(multiplayerMap.layers.expand((layer) => layer), hasLength(1192));
     expect(multiplayerMap.worldWidth, 1280);
-    expect(multiplayerMap.worldHeight, 960);
-    expect(multiplayerMap.oneWayPlatforms, hasLength(4));
+    expect(multiplayerMap.worldHeight, 1280);
+    expect(multiplayerMap.oneWayPlatforms, hasLength(6));
     expect(multiplayerMap.hazards, isEmpty);
     expect(multiplayerMap.enemyMarkers, isEmpty);
     expect(multiplayerMap.checkpointMarkers, isEmpty);
@@ -227,7 +227,10 @@ void main() {
       for (var index = 0; index < 4; index++)
         multiplayerMap.multiplayerSpawnFor(spawnIndex: index)!,
     ];
-    expect(spawns.map((spawn) => spawn.y), everyElement(378));
-    expect(spawns.map((spawn) => spawn.x), [476, 700, 552, 776]);
+    expect(spawns.map((spawn) => spawn.y), everyElement(730));
+    for (final spawn in spawns) {
+      final body = Aabb(spawn.x, spawn.y, 28, 42);
+      expect(multiplayerMap.solids.any(body.overlaps), isFalse);
+    }
   });
 }

@@ -149,7 +149,7 @@ export function createMultiplayerServer({
         id: `${horde}-${index}-${randomUUID().slice(0, 6)}`,
         type,
         x: Math.round(x),
-        y: 608 - height,
+        y: 928 - height,
         health: type === 'volt' ? 12 : 3,
       };
       room.enemies.set(enemy.id, enemy);

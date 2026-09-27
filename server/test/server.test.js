@@ -85,7 +85,7 @@ test('creates, lists and caps public rooms at four players', async () => {
     assert.equal(firstHorde.enemies.some((enemy) => enemy.type === 'volt'), false);
     assert.equal(
       firstHorde.enemies.every(
-        (enemy) => enemy.x >= 240 && enemy.x <= 1010 && enemy.y >= 548 && enemy.y <= 576,
+        (enemy) => enemy.x >= 240 && enemy.x <= 1010 && enemy.y >= 868 && enemy.y <= 896,
       ),
       true,
     );
