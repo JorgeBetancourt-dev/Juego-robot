@@ -57,6 +57,7 @@ export function enemyTypeForHorde(horde, random = Math.random) {
 
 export function createMultiplayerServer({
   port = Number(process.env.PORT || 8080),
+  initialCountdownMs = 5000,
   intermissionMs = 10000,
   hitCooldownMs = 220,
   random = Math.random,
@@ -128,9 +129,10 @@ export function createMultiplayerServer({
     const count = enemyCountForHorde(horde, room.clients.size);
     for (let index = 0; index < count; index++) {
       const type = enemyTypeForHorde(horde, random);
-      const rightmostX = type === 'volt' ? 1048 : 1200;
-      const spacing = (rightmostX - 80) / Math.max(1, count - 1);
-      const x = count === 1 ? 564 : 80 + spacing * index;
+      const leftmostX = 240;
+      const rightmostX = type === 'volt' ? 904 : 1010;
+      const spacing = (rightmostX - leftmostX) / Math.max(1, count - 1);
+      const x = count === 1 ? 564 : leftmostX + spacing * index;
       const height = type === 'volt'
         ? 220
         : type === 'watcher'
@@ -142,12 +144,23 @@ export function createMultiplayerServer({
         id: `${horde}-${index}-${randomUUID().slice(0, 6)}`,
         type,
         x: Math.round(x),
-        y: 928 - height,
+        y: 608 - height,
         health: type === 'volt' ? 12 : 3,
       };
       room.enemies.set(enemy.id, enemy);
     }
     broadcastHordeState(room);
+  }
+
+  function prepareFirstHorde(room) {
+    if (room.hordeTimer) return;
+    room.hordePhase = 'preparing';
+    room.intermissionEndsAt = Date.now() + initialCountdownMs;
+    broadcastHordeState(room);
+    room.hordeTimer = setTimeout(() => {
+      room.hordeTimer = null;
+      if (rooms.has(room.id) && room.clients.size > 0) startHorde(room, 1);
+    }, initialCountdownMs);
   }
 
   function finishHorde(room) {
@@ -272,7 +285,7 @@ export function createMultiplayerServer({
         if (!room) return;
         room.readyPlayers.add(client.id);
         if (room.hordePhase === 'waiting' && room.horde === 0) {
-          startHorde(room, 1);
+          prepareFirstHorde(room);
         } else {
           send(client, hordeState(room));
         }

@@ -18,6 +18,7 @@ Cada sala ejecuta cinco hordas cooperativas. Las primeras cuatro generan
 `jugadores × 2`, `× 3`, `× 4` y `× 5` enemigos aleatorios sin VOLT. La quinta
 genera un VOLT por jugador. El servidor conserva la vida compartida de los
 enemigos y espera 10 segundos entre hordas.
+Antes de la primera horda muestra una preparación sincronizada de 5 segundos.
 
 Prueba contra un despliegue público:
 

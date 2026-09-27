@@ -112,6 +112,22 @@ void main() {
     expect(volt.alive, isFalse);
   });
 
+  test('un drone de horda permanece cerca de su aparición visible', () {
+    final drone = TiledEnemyActor(
+      id: 'drone_horda',
+      type: TiledEnemyType.drone,
+      markerX: 0,
+      markerY: 0,
+      spawnX: 300,
+      spawnY: 500,
+    );
+
+    for (var frame = 0; frame < 20; frame++) {
+      drone.update(0.05, const Aabb(600, 378, 28, 42), const [], const []);
+    }
+    expect(drone.body.top, inInclusiveRange(480, 570));
+  });
+
   test('Volt solo activa el encuentro dentro de su sala', () {
     final marker = map.enemyMarkers.singleWhere(
       (candidate) => candidate.type == TiledEnemyType.volt,

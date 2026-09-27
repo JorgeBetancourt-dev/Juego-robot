@@ -42,7 +42,7 @@ function clientFor(port, name) {
 }
 
 test('creates, lists and caps public rooms at four players', async () => {
-  const server = await createMultiplayerServer({ port: 0 });
+  const server = await createMultiplayerServer({ port: 0, initialCountdownMs: 0 });
   const clients = [];
   try {
     const owner = await clientFor(server.port, 'M-0');
@@ -83,6 +83,12 @@ test('creates, lists and caps public rooms at four players', async () => {
     assert.equal(firstHorde.horde, 1);
     assert.equal(firstHorde.enemies.length, 8);
     assert.equal(firstHorde.enemies.some((enemy) => enemy.type === 'volt'), false);
+    assert.equal(
+      firstHorde.enemies.every(
+        (enemy) => enemy.x >= 240 && enemy.x <= 1010 && enemy.y >= 548 && enemy.y <= 576,
+      ),
+      true,
+    );
 
     const fifth = await clientFor(server.port, 'Jugador 5');
     clients.push(fifth);
@@ -119,6 +125,7 @@ test('scales five hordes and reserves VOLT for the last one', () => {
 test('waits between hordes and advances when every enemy is defeated', async () => {
   const server = await createMultiplayerServer({
     port: 0,
+    initialCountdownMs: 30,
     intermissionMs: 30,
     hitCooldownMs: 0,
     random: () => 0,
@@ -128,6 +135,11 @@ test('waits between hordes and advances when every enemy is defeated', async () 
     client.socket.send(JSON.stringify({ type: 'create_room', name: 'Hordas' }));
     await client.waitFor((message) => message.type === 'room_joined');
     client.socket.send(JSON.stringify({ type: 'arena_ready' }));
+    const preparation = await client.waitFor(
+      (message) => message.type === 'horde_state' && message.phase === 'preparing',
+    );
+    assert.equal(preparation.horde, 0);
+    assert.ok(preparation.intermissionRemainingMs > 0);
     const first = await client.waitFor(
       (message) => message.type === 'horde_state' && message.horde === 1,
     );

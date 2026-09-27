@@ -113,8 +113,7 @@ class _GameScreenState extends State<GameScreen> {
                   ),
                 ),
               ),
-              if (widget.multiplayerClient?.hordePhase ==
-                  MultiplayerHordePhase.intermission)
+              if (_showHordeCountdown())
                 Positioned(
                   top: 12,
                   left: 72,
@@ -125,7 +124,7 @@ class _GameScreenState extends State<GameScreen> {
                       child: Chip(
                         avatar: const Icon(Icons.timer_outlined, size: 19),
                         label: Text(
-                          'SIGUIENTE HORDA EN ${_remainingIntermissionSeconds()} s',
+                          '${_countdownTitle()} ${_remainingIntermissionSeconds()} s',
                           style: const TextStyle(fontWeight: FontWeight.w800),
                         ),
                       ),
@@ -174,6 +173,17 @@ class _GameScreenState extends State<GameScreen> {
     }
     return client.hordeNumber.clamp(1, client.totalHordes);
   }
+
+  bool _showHordeCountdown() {
+    final phase = widget.multiplayerClient?.hordePhase;
+    return phase == MultiplayerHordePhase.preparing ||
+        phase == MultiplayerHordePhase.intermission;
+  }
+
+  String _countdownTitle() =>
+      widget.multiplayerClient?.hordePhase == MultiplayerHordePhase.preparing
+      ? 'PRIMERA HORDA EN'
+      : 'SIGUIENTE HORDA EN';
 
   int _remainingIntermissionSeconds() {
     final endsAt = widget.multiplayerClient?.intermissionEndsAt;

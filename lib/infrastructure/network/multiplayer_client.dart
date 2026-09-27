@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart';
 
 enum MultiplayerConnectionStatus { disconnected, connecting, connected, error }
 
-enum MultiplayerHordePhase { waiting, active, intermission, victory }
+enum MultiplayerHordePhase { waiting, preparing, active, intermission, victory }
 
 class MultiplayerRoom {
   const MultiplayerRoom({
@@ -265,6 +265,7 @@ class MultiplayerClient extends ChangeNotifier {
     hordeNumber = (json['horde'] as num?)?.toInt() ?? 0;
     totalHordes = (json['totalHordes'] as num?)?.toInt() ?? 5;
     hordePhase = switch (json['phase']) {
+      'preparing' => MultiplayerHordePhase.preparing,
       'active' => MultiplayerHordePhase.active,
       'intermission' => MultiplayerHordePhase.intermission,
       'victory' => MultiplayerHordePhase.victory,

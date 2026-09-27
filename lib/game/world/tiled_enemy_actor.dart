@@ -165,7 +165,8 @@ class TiledEnemyActor {
 
   void _updateDrone(double dt, List<Aabb> solids, List<Aabb> oneWayPlatforms) {
     velocityX = 82 * direction.toDouble();
-    final desiredY = markerY - height + 32 + math.sin(elapsed * 1.4) * 54;
+    final flightAnchorY = spawnY ?? markerY - height + 32;
+    final desiredY = flightAnchorY + math.sin(elapsed * 1.4) * 54;
     velocityY = (desiredY - y).clamp(-105.0, 105.0).toDouble();
     if (_moveHorizontal(dt, solids)) direction *= -1;
     _moveVertical(dt, solids, oneWayPlatforms, gravityBody: false);
