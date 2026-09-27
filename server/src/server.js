@@ -127,12 +127,17 @@ export function createMultiplayerServer({
     room.intermissionEndsAt = null;
     room.enemies.clear();
     const count = enemyCountForHorde(horde, room.clients.size);
+    const voltSpawnSlots = [240, 904, 320, 824];
     for (let index = 0; index < count; index++) {
       const type = enemyTypeForHorde(horde, random);
       const leftmostX = 240;
-      const rightmostX = type === 'volt' ? 904 : 1010;
+      const rightmostX = 1010;
       const spacing = (rightmostX - leftmostX) / Math.max(1, count - 1);
-      const x = count === 1 ? 564 : leftmostX + spacing * index;
+      const x = type === 'volt'
+        ? voltSpawnSlots[index % voltSpawnSlots.length]
+        : count === 1
+          ? 564
+          : leftmostX + spacing * index;
       const height = type === 'volt'
         ? 220
         : type === 'watcher'
